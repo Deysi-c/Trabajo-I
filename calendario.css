@@ -1,527 +1,554 @@
-/* Universal Styles & Body */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap'); /* Para títulos o elementos distintivos */
-
-/* Define Color Palette using CSS Variables */
+/* Variables de color para fácil mantenimiento */
 :root {
-    --primary-red: #EE5F4D; /* Main red for headers, key elements */
-    --dark-orange: #F98F2C; /* Darker orange for buttons, active states */
-    --light-orange: #FFE6CC; /* Lighter orange for general backgrounds */
-    --accent-yellow: #FFD700; /* Yellow for highlights, hover effects */
-    --accent-green: #8BC34A; /* Green for success states, like "optimo" */
-    --text-dark: #333;       /* General dark text */
-    --text-medium: #555;     /* Medium dark text */
-    --text-light: #fff;      /* White text for dark backgrounds */
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --border-color-light: #ddd;
-    --border-color-medium: #ccc;
-    --background-light-grey: #f9f9f9; /* Light grey for subtle backgrounds */
+    --primary-purple: #6A0DAD; /* Morado intenso */
+    --light-purple: #B0A0D8; /* Morado claro para el fondo */
+    --dark-grey: #333;
+    --medium-grey: #666;
+    --light-grey: #eee;
+    --white: #fff;
+    --off-white: #f9f9f9; /* Blanco roto para fondos */
+    --accent-green: #28a745; /* Para elementos de éxito/completado */
+    --accent-red: #dc3545; /* Para elementos de error/eliminar */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--light-orange); /* Fallback color for background */
+     /* Color de fondo base */
     color: var(--text-dark);
     line-height: 1.6;
-
-    /* Background Image Setup for image_f7ed24.png */
-    background-image: url('kit.jpg'); /* ¡IMPORTANTE! Cambia esto a la ruta real de tu imagen */
-    background-repeat: repeat; /* Para que la imagen se repita y forme un patrón */
-    background-size: 180px; /* Ajusta el tamaño de la imagen del patrón. Experimenta con este valor. */
-    background-blend-mode: multiply; /* Mezcla la imagen con el color de fondo para un efecto sutil */
-    opacity: 1;
+    position: relative; /* Necesario para que ::before se ubique bien */
+    overflow-x: hidden; /* Previene scroll horizontal */
 }
 
-/* Header (Navigation Bar) Styles - Reused from reporte.css for consistency */
+/* Fondo con opacidad usando pseudo-elemento */
+body::before {
+    content: "";
+    position: fixed; /* Fijo para que cubra toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-.calendar-header-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    margin-top: 1rem; /* Espacio superior dentro del calendar-container */
-    margin-bottom: 0.5rem; /* Espacio inferior antes de la barra naranja */
-    gap: 1rem; /* Espacio entre las flechas y el texto del mes */
-    width: 100%; /* Para que el flexbox ocupe todo el ancho disponible */
-}
-.nav-button { /* Estilos para los botones de flecha (tus botones con bi-arrow-left/right-circle-fill) */
-    background-color: transparent; /* Fondo transparente */
-    border: none; /* Sin borde */
-    /* Tus iconos de Bootstrap tienen un círculo ya, no es necesario border-radius: 50% para el botón en sí */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 2.5rem; /* Tamaño grande para los iconos de flecha */
-    color: var(--text-dark); /* Color oscuro para las flechas */
-    transition: color 0.3s ease, transform 0.2s ease;
-    outline: none; /* Elimina el contorno al hacer clic */
-    padding: 0; /* Elimina padding interno del botón */
+    background-image: url('fon.jpg'); /* Cambia a la ruta real si está en otra carpeta */
+    background-repeat: repeat;
+    background-size: 600px;
+    background-attachment: fixed;
+
+    opacity: 0.2; /* Ajusta este valor según qué tan tenue quieras el fondo */
+    z-index: -1;  /* Asegura que esté detrás de todo el contenido */
+    pointer-events: none; /* Evita que bloquee clics u otras interacciones */
 }
 
 
-
-
-
-/* Calendar Page Specific Styles */
+/* Contenido Principal del Calendario */
 .calendar-page-content {
     max-width: 1200px;
     margin: 30px auto;
-    padding: 20px;
-    background-color: var(--text-light);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px var(--shadow-light);
+    padding: 25px;
+    background-color: var(--off-white); /* Fondo blanco roto para el contenedor principal del calendario */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    text-align: center;
 }
 
 .page-title {
-    text-align: center;
-    color: var(--primary-red);
-    margin-bottom: 30px;
-    font-size: 2.2em;
     font-family: 'Poetsen One', sans-serif;
+    color: var(--primary-purple);
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+/* Contenedor del Calendario */
 .calendar-container {
-    background-color: var(--background-light-grey);
+    background-color: var(--white);
     border-radius: 10px;
-    padding: 20px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra más suave para el calendario interno */
+    margin-bottom: 30px;
 }
 
-
+/* Navegación del Calendario (mes y año) */
+.calendar-header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 0 10px;
+}
 
 .current-month-year {
-    margin: 0;
-    font-size: 1.6em;
-    font-weight: 600;
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 1.8em;
+    color: var(--primary-purple);
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
 }
 
+.nav-button {
+    background: none;
+    border: none;
+    font-size: 2.2em;
+    color: var(--primary-purple);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
 
+.nav-button:hover {
+    color: darken(var(--primary-purple), 10%); /* Oscurecer un poco al pasar el ratón */
+    transform: scale(1.1);
+}
+
+/* Cuadrícula de los días de la semana */
 .calendar-grid-container {
-    background-color: var(--text-light);
+    border: 1px solid var(--light-grey);
     border-radius: 8px;
-    box-shadow: 0 2px 8px var(--shadow-light);
-    overflow: hidden; /* Ensures borders/shadows are contained */
+    overflow: hidden; /* Para que los bordes internos se vean bien */
 }
 
 .weekdays-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background-color: var(--dark-orange);
-    color: var(--text-light);
-    font-weight: bold;
-    padding: 10px 0;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color-medium);
+    background-color: var(--primary-purple);
+    color: var(--white);
+    font-weight: 600;
+    padding: 12px 0;
+    border-bottom: 2px solid var(--light-purple);
+    font-size: 1.1em;
 }
 
 .weekdays-grid div {
-    padding: 8px 0;
+    text-align: center;
 }
 
+/* Cuadrícula de los días del mes */
 .calendar-days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px; /* Small gap for visual separation */
-    background-color: var(--border-color-light); /* Background for the gaps */
-    padding-top: 1px; /* Align with top gap */
+    gap: 1px; /* Espacio entre los días para el efecto de cuadrícula */
+    background-color: var(--light-grey); /* Fondo para las líneas de la cuadrícula */
+    padding: 1px; /* Borde interno para la cuadrícula */
+    border-radius: 0 0 8px 8px;
 }
 
 .calendar-day {
-    background-color: var(--text-light);
-    min-height: 100px; /* Minimum height for each day cell */
-    padding: 10px;
-    border: 1px solid transparent; /* Placeholder for hover effect */
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    background-color: var(--white);
+    padding: 15px 5px;
+    min-height: 100px; /* Altura mínima para cada día */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: relative;
-    overflow: hidden;
+    font-size: 0.95em;
+    text-align: left;
+    border-radius: 4px; /* Bordes redondeados para cada celda */
+    transition: background-color 0.2s ease-in-out;
 }
 
-.calendar-day:hover {
-    background-color: var(--background-light-grey);
-    border-color: var(--dark-orange);
+.calendar-day:hover:not(.empty):not(.current-day) {
+    background-color: var(--off-white);
+    cursor: pointer;
 }
 
-
-
-.calendar-day.other-month {
-    background-color: var(--background-light-grey);
-    color: #a0a0a0; /* Lighter color for days outside the current month */
-}
-
-.calendar-day.today {
-    background-color: var(--light-orange);
-    border: 2px solid var(--primary-red);
-    box-shadow: 0 0 5px rgba(238, 95, 77, 0.5);
+.calendar-day.empty {
+    background-color: var(--light-grey);
+    cursor: default;
 }
 
 .day-number {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: var(--text-dark);
-    margin-bottom: 5px;
-    z-index: 2; /* Ensure number is above events */
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+    padding-left: 5px;
 }
 
-.event-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+.calendar-day.current-day {
+    background-color: var(--light-purple); /* Día actual destacado */
+    color: var(--white);
+    font-weight: 600;
+    border: 2px solid var(--primary-purple);
+    box-shadow: inset 0 0 0 2px var(--primary-purple);
+}
+.calendar-day.current-day .day-number {
+    color: var(--primary-purple);
+    background-color: var(--white);
+    border-radius: 50%;
+    padding: 2px 8px;
+    box-shadow: 0 0 0 2px var(--primary-purple);
 }
 
-.event-item {
-    background-color: var(--accent-green); /* Default for events */
-    color: var(--text-light);
-    border-radius: 5px;
-    padding: 4px 8px;
-    margin-bottom: 3px;
-    font-size: 0.85em;
-    cursor: pointer;
+.event-marker {
+    background-color: var(--primary-purple); /* Color de los marcadores de evento */
+    color: var(--white);
+    font-size: 0.75em;
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-top: 5px;
+    display: block; /* Para que cada marcador ocupe su propia línea */
+    max-width: 90%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    width: calc(100% - 16px); /* Adjust for padding */
-}
-
-.event-item:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.event-item.completed {
-    background-color: #6c757d; /* Grey for completed events */
-    text-decoration: line-through;
-    opacity: 0.8;
-}
-
-.event-item.important {
-    background-color: var(--primary-red); /* Highlight important events */
-}
-
-/* Add Event Button */
-.add-event-button {
-    display: block;
-    width: fit-content;
-    margin: 30px auto 0;
-    padding: 15px 30px;
-    background-color: var(--dark-orange);
-    color: var(--text-light);
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-weight: bold;
+    margin-left: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px var(--shadow-light);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.event-marker:hover {
+    background-color: darken(var(--primary-purple), 10%);
+}
+
+.event-marker.completed {
+    background-color: var(--accent-green); /* Eventos completados */
+}
+
+/* Botón "Agregar Pedido/Evento" */
+.add-event-button {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .add-event-button:hover {
-    background-color: #E68026;
+    background-color: darken(var(--primary-purple), 8%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px var(--shadow-medium);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Modal Styles - Reused and adapted from header-nav.css */
+/* Modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px; /* Location of the box */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Padding para evitar que el contenido toque los bordes en pantallas pequeñas */
+    box-sizing: border-box; /* Incluir padding en el tamaño total */
 }
 
 .modal-content {
-    background-color: var(--text-light);
-    margin: 5% auto; /* 15% from the top and centered */
-    padding: 30px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    width: 90%; /* Could be more or less, depending on screen size */
-    max-width: 500px; /* Max width for larger screens */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: var(--white);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 550px;
     position: relative;
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeInScale 0.3s ease-out; /* Animación de entrada */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .close-button {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
+    color: var(--medium-grey);
+    font-size: 2.5em;
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 15px;
+    right: 25px;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: var(--primary-red);
-    text-decoration: none;
+    color: var(--dark-grey);
 }
 
-.modal-content h3 {
-    text-align: center;
-    color: var(--primary-red);
-    margin-bottom: 25px;
-    font-size: 1.8em;
+#modal-title {
     font-family: 'Poetsen One', sans-serif;
+    color: var(--primary-purple);
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
-/* Event Form and Details Sections */
-.event-form-section label,
-.event-details-section p strong {
+/* Formulario del Modal */
+.event-form-section label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--text-medium);
+    font-weight: 600;
+    color: var(--dark-grey);
+    text-align: left;
 }
 
 .event-form-section input[type="text"],
 .event-form-section textarea {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* Ajuste para padding */
     padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--border-color-light);
-    border-radius: 8px;
+    margin-bottom: 18px;
+    border: 1px solid var(--light-grey);
+    border-radius: 6px;
     font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: var(--medium-grey);
+    transition: border-color 0.2s ease;
 }
 
-.event-form-section input:focus,
+.event-form-section input[type="text"]:focus,
 .event-form-section textarea:focus {
-    border-color: var(--dark-orange);
-    box-shadow: 0 0 0 3px rgba(249, 143, 44, 0.2);
+    border-color: var(--primary-purple);
     outline: none;
+    box-shadow: 0 0 0 2px rgba(106, 13, 173, 0.2); /* Sombra de enfoque sutil */
 }
 
 .event-form-section textarea {
     resize: vertical;
     min-height: 80px;
+    max-height: 200px;
 }
 
-.modal-actions, .detail-actions {
-    text-align: center;
-    margin-top: 20px;
+.modal-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinear botones a la derecha */
+    gap: 15px;
+    margin-top: 25px;
 }
 
-.save-button, .update-button, .mark-completed-button, .edit-button, .delete-button {
-    padding: 10px 20px;
+.save-button,
+.update-button,
+.edit-button,
+.delete-button,
+.mark-completed-button {
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    color: var(--text-light);
-    margin: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .save-button, .update-button {
-    background-color: var(--accent-green);
+    background-color: var(--primary-purple);
+    color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .save-button:hover, .update-button:hover {
-    background-color: #7BBF3C;
+    background-color: darken(var(--primary-purple), 8%);
     transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Vista de Detalles del Evento */
+.event-details-section p {
+    margin-bottom: 12px;
+    text-align: left;
+    color: var(--dark-grey);
+}
+
+.event-details-section p strong {
+    color: var(--primary-purple);
+}
+
+#view-description {
+    white-space: pre-wrap; /* Mantiene saltos de línea del textarea */
+    word-wrap: break-word; /* Rompe palabras largas */
+    background-color: var(--off-white);
+    border: 1px solid var(--light-grey);
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 0.95em;
+    color: var(--medium-grey);
+}
+
+.detail-actions {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .mark-completed-button {
-    background-color: #28a745; /* Bootstrap success green */
+    background-color: var(--accent-green);
+    color: var(--white);
 }
-
 .mark-completed-button:hover {
-    background-color: #218838;
-    transform: translateY(-1px);
+    background-color: darken(var(--accent-green), 8%);
 }
 
 .edit-button {
-    background-color: var(--dark-orange);
+    background-color: var(--medium-grey);
+    color: var(--white);
 }
-
 .edit-button:hover {
-    background-color: #E68026;
-    transform: translateY(-1px);
+    background-color: darken(var(--medium-grey), 8%);
 }
 
 .delete-button {
-    background-color: var(--primary-red);
+    background-color: var(--accent-red);
+    color: var(--white);
 }
-
 .delete-button:hover {
-    background-color: #D64C3C;
-    transform: translateY(-1px);
+    background-color: darken(var(--accent-red), 8%);
 }
 
-/* Event Details View specific styles */
-.event-details-section p {
-    margin-bottom: 10px;
-    color: var(--text-dark);
-    line-height: 1.5;
-}
-
-.event-details-section #view-description {
-    white-space: pre-wrap; /* Preserves newlines in description */
-}
-
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .calendar-page-content {
-        padding: 15px;
-        margin: 20px auto;
-    }
-    .page-title {
-        font-size: 2em;
-    }
-    .current-month-year {
-        font-size: 1.4em;
-    }
-    .nav-button {
-        font-size: 1.6em;
-    }
-    .calendar-day {
-        min-height: 80px;
-        padding: 8px;
-    }
-    .day-number {
-        font-size: 1.2em;
-    }
-    .event-item {
-        font-size: 0.8em;
-        padding: 3px 6px;
-    }
-}
-
+/* Responsividad */
 @media (max-width: 768px) {
-    /* Navigation bar responsiveness */
-    .nav-toggle {
-        display: block; /* Show hamburger button */
+    .calendar-page-content {
+        margin: 20px auto;
+        padding: 15px;
     }
 
-    .nav-menu {
-        flex-direction: column;
-        width: 100%;
-        display: none; /* Hide menu by default */
-        text-align: center;
-        background-color: var(--text-light);
-        position: absolute;
-        top: 80px; /* Adjust based on header height */
-        left: 0;
-        box-shadow: 0 2px 4px var(--shadow-light);
-        z-index: 1000;
+    .page-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
     }
 
-    .nav-menu.active {
-        display: flex; /* Show menu when active */
-    }
-
-    .nav-menu-item {
-        margin: 10px 0;
-    }
-
-    .nav-menu-link {
-        color: var(--text-dark); /* Changed to dark text on light menu background */
-    }
-    /* Hide the yellow line in mobile view to avoid clutter */
-    .nav-menu-link::after {
-        display: none;
-    }
-
-    .header .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .header h1 {
-        order: 2; /* Put title below logo and button */
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .header .logo { /* Assuming you have a .logo class in your HTML */
-        order: 1;
-    }
-
-    .header .nav-toggle {
-        order: 3;
-        margin-left: auto; /* Push to the right */
-    }
-
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-        padding: 20px;
-    }
-
-    .modal-content h3 {
+    .current-month-year {
         font-size: 1.5em;
     }
 
-    .save-button, .update-button, .mark-completed-button, .edit-button, .delete-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-        margin: 5px 2px;
+    .nav-button {
+        font-size: 1.8em;
     }
 
-    .detail-actions button {
-        display: block;
-        width: 90%;
-        margin: 10px auto;
+    .weekdays-grid {
+        font-size: 0.9em;
+        padding: 10px 0;
+    }
+
+    .calendar-day {
+        min-height: 80px;
+        padding: 10px 3px;
+        font-size: 0.85em;
+    }
+
+    .day-number {
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    .event-marker {
+        font-size: 0.7em;
+        padding: 2px 4px;
+        margin-left: 3px;
+    }
+
+    .add-event-button {
+        padding: 12px 20px;
+        font-size: 1em;
+        margin-top: 20px;
+    }
+
+    .modal-content {
+        padding: 25px;
+    }
+
+    #modal-title {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .event-form-section input[type="text"],
+    .event-form-section textarea {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .save-button,
+    .update-button,
+    .edit-button,
+    .delete-button,
+    .mark-completed-button {
+        padding: 10px 18px;
+        font-size: 0.9em;
     }
 }
 
 @media (max-width: 480px) {
-    .header h1 {
-        font-size: 1.5em;
+    .calendar-page-content {
+        padding: 10px;
+        margin: 15px auto;
     }
+
     .page-title {
-        font-size: 1.8em;
+        font-size: 1.5em;
+        margin-bottom: 15px;
     }
+
+    .calendar-container {
+        padding: 15px;
+    }
+
     .current-month-year {
         font-size: 1.2em;
     }
+
     .nav-button {
-        font-size: 1.4em;
+        font-size: 1.5em;
     }
+
+    .weekdays-grid {
+        font-size: 0.8em;
+        padding: 8px 0;
+    }
+
     .calendar-day {
-        min-height: 70px;
-        padding: 5px;
+        min-height: 60px;
+        padding: 8px 2px;
+        font-size: 0.75em;
     }
     .day-number {
-        font-size: 1em;
+        font-size: 0.9em;
+        padding: 1px 5px;
     }
-    .event-item {
-        font-size: 0.75em;
-        padding: 2px 5px;
-    }
+
     .add-event-button {
-        padding: 12px 20px;
-        font-size: 1em;
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin-top: 15px;
     }
+
     .modal-content {
-        padding: 15px;
+        padding: 20px;
     }
-    .modal-content h3 {
+
+    #modal-title {
         font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .event-form-section input[type="text"],
+    .event-form-section textarea {
+        font-size: 0.9em;
+        padding: 8px;
+        margin-bottom: 12px;
+    }
+    .event-form-section textarea {
+        min-height: 60px;
+    }
+
+    .modal-actions, .detail-actions {
+        flex-direction: column; /* Apilar botones */
+        align-items: stretch;
+        gap: 10px;
     }
 }
