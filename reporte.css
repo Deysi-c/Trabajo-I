@@ -25,22 +25,30 @@ html {
 }
 
 body {
+    position: relative;
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--light-orange);
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
-    /* CAMBIO CLAVE AQUÍ: Usar una imagen externa como patrón */
-    background-image: url('kit.jpg'); /* Reemplaza 'kitchen_pattern.png' con la ruta real de tu imagen */
-    background-repeat: repeat;
-    background-size: 150px; /* Ajusta este valor para controlar el tamaño de los elementos del patrón. Puedes probar con 'auto', 'contain', 'cover' o un valor en px. */
-    background-blend-mode: multiply; /* Mantiene la mezcla con el color de fondo para un efecto sutil */
-
-    
 }
+
+body::before {
+    content: "";
+    position: fixed; /* o absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('fon.jpg');
+    background-size: 600px;
+    background-repeat: repeat;
+    opacity: 0.2; /* Ajusta la opacidad aquí */
+    z-index: -1;
+}
+
 
 /* El resto de tu CSS permanece igual */
 /* Header (Navigation Bar) */
