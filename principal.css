@@ -1,0 +1,92 @@
+/* Universal Styles & Body */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Light background */
+    color: #333;
+    line-height: 1.6;
+}
+
+
+/* Category Buttons Container */
+.Boton { /* Renamed from "Boton" to "category-buttons" for clarity, but kept for your HTML */
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 30px; /* Space between buttons */
+    padding: 40px 20px;
+    max-width: 1200px; /* Max width for the button area */
+    margin: 50px auto; /* Center the container and add vertical space */
+}
+
+.Boton .boton { /* Anchor tag styling for the "PANADERÍA Y PASTELERÍA" button */
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Inherit color from parent */
+    display: block; /* Make the link take up the full button area */
+}
+
+.Boton button {
+    background-color: #ffffff; /* White background for buttons */
+    border: none;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+    padding: 30px;
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 250px; /* Fixed width for consistent button size */
+    height: 250px; /* Fixed height for consistent button size */
+    text-align: center;
+}
+
+.Boton button:hover {
+    transform: translateY(-8px); /* Lift button on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.Boton button img {
+    width: 100px; /* Larger images */
+    height: 90px;
+    object-fit: contain; /* Ensure image fits without cropping */
+    margin-bottom: 20px; /* Space between image and text */
+    border-radius: 10px; /* Slightly rounded corners for images */
+}
+
+.Boton button h2 {
+    font-size: 1.4em; /* Larger heading for categories */
+    color: #4CAF50; /* Green text for headings */
+    margin: 0;
+    line-height: 1.3; /* Adjust line height for multi-line text */
+}
+
+
+@media (max-width: 480px) {
+
+    .Boton {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        align-items: center; /* Center stacked buttons */
+        gap: 25px;
+    }
+
+    .Boton button {
+        width: 90%; /* Make buttons wider to fill space */
+        max-width: 280px; /* Prevent them from getting too wide on slightly larger phones */
+        height: auto; /* Allow height to adjust based on content */
+        min-height: 180px;
+        padding: 25px;
+    }
+
+    .Boton button img {
+        width: 70px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .Boton button h2 {
+        font-size: 1.1em;
+    }
+}

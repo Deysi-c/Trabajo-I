@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de inicio y acceso al sistema Cost and Planner.">
+    <meta name="author" content="Karina, Deysi, Leo">
+    <title>COST AND PLANNER - Inicio</title>
+    <link rel="icon" href="logo.jpg" type="image/png">
+
+    <link rel="stylesheet" href="portada.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header class="navbar" id="loginHeader">
+        <div class="logo">
+            <img src="logo.jpg" alt="Logo de Cost and Planner">
+        </div>
+        <h1>COST AND PLANNER</h1>
+        <div class="login-form">
+            <input type="text" id="nombre" placeholder="USUARIO">
+            <button onclick="ingresar()">Entrar</button>
+        </div>
+    </header>
+
+    <section class="carousel-section" id="carouselSection">
+        <article class="carousel-section-cards container">
+            <div class="section_card show">
+                <div class="section_card-img">
+                    <img src="portada1.jpg" alt="Imagen de portada 1">
+                </div>
+            </div>
+
+            <div class="section_card">
+                <div class="section_card-img">
+                    <img src="portada2.jpg" alt="Imagen de portada 2">
+                </div>
+            </div>
+
+            <div class="section_card">
+                <div class="section_card-img">
+                    <img src="portada3.jpg" alt="Imagen de portada 3">
+                </div>
+            </div>
+
+            <div class="carousel-control">
+                <a href="#" class="carousel_control prev"><i class="bi bi-arrow-left"></i></a>
+                <a href="#" class="carousel_control next"><i class="bi bi-arrow-right"></i></a>
+            </div>
+        </article>
+    </section>
+
+    <script src="portada.js"></script>
+</body>
+</html>

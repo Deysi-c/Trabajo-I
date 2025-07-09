@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Inventario</title>
+  <link rel="stylesheet" href="inventario.css">
+  <link rel="stylesheet" href="nav.css" />
+
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <header class="header">
+			<img src="logo.jpg" alt="Logo" class=logo>
+			<h1 class="titulo">COST AND PLANNER </h1>
+			<button class="hamburguesa" aria-label="Abrir menú">
+				<i class="fa-solid fa-bars"></i>
+			</button>
+			<!--Menu de navegacion -->
+			<nav class="navbar">
+				<ul class="nav-menu">
+					<li class="nav-menu-item"><a href="principal.html" class="nav-menu-link nav-link">Principal</a></li>
+        				<li class="nav-menu-item"><a href="calendario.html" class="nav-menu-link nav-link">Calendario</a></li>
+        				<li class="nav-menu-item"><a href="inventario.html" class="nav-menu-link nav-link">Inventario</a></li>
+        				<li class="nav-menu-item"><a href="reporte.html" class="nav-menu-link nav-link">Reporte</a></li>
+        				<li class="nav-menu-item"><a href="portada.html" class="nav-menu-link nav-link">Cerrar Sesión</a></li>
+      				</ul>
+    			</nav>
+		</header>
+
+
+  <div class="header-titulo">
+    <h1><i class="fas fa-warehouse"></i> Sistema de Inventario</h1>
+    
+  </div>
+  
+  <!-- Estadísticas -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon perecibles-icon">
+        <i class="fas fa-apple-alt"></i>
+      </div>
+      <div class="stat-number" id="total-perecibles">0</div>
+      <div class="stat-label">Perecibles</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon no-perecibles-icon">
+        <i class="fas fa-box"></i>
+      </div>
+      <div class="stat-number" id="total-no-perecibles">0</div>
+      <div class="stat-label">No Perecibles</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon vencimiento-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="stat-number" id="por-vencer">0</div>
+      <div class="stat-label">Por Vencer</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stock-icon">
+        <i class="fas fa-chart-bar"></i>
+      </div>
+      <div class="stat-number" id="bajo-stock">0</div>
+      <div class="stat-label">Bajo Stock</div>
+    </div>
+  </div>
+
+  <!-- Formulario de Agregar -->
+  <div class="form-container">
+    <h2><i class="fas fa-plus-circle"></i> Agregar Producto</h2>
+    <form id="form-producto">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nombre"><i class="fas fa-tag"></i> Nombre del Producto</label>
+          <input type="text" id="nombre" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="tipo"><i class="fas fa-list"></i> Tipo</label>
+          <select id="tipo" required>
+            <option value="">Seleccionar tipo</option>
+            <option value="perecible">Perecible</option>
+            <option value="no-perecible">No Perecible</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="cantidad"><i class="fas fa-calculator"></i> Cantidad</label>
+          <input type="number" id="cantidad" min="0" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="unidad"><i class="fas fa-balance-scale"></i> Unidad</label>
+          <select id="unidad" required>
+            <option value="">Seleccionar unidad</option>
+            <option value="Unidades">Unidades</option>
+            <option value="Kilos">Kilos</option>
+            <option value="Gramos">Gramos</option>
+            <option value="Litros">Litros</option>
+            <option value="Mililitros">Mililitros</option>
+            <option value="Cajas">Cajas</option>
+            <option value="Paquetes">Paquetes</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="fecha-ingreso"><i class="fas fa-calendar"></i> Fecha de Ingreso</label>
+          <input type="date" id="fecha-ingreso" required>
+        </div>
+        
+        <div class="form-group" id="grupo-caducidad" style="display: none;">
+          <label for="fecha-caducidad"><i class="fas fa-calendar-times"></i> Fecha de Caducidad</label>
+          <input type="date" id="fecha-caducidad">
+        </div>
+        
+        <div class="form-group">
+          <label for="stock-minimo"><i class="fas fa-exclamation"></i> Stock Mínimo</label>
+          <input type="number" id="stock-minimo" min="0" step="0.01" value="5">
+        </div>
+        
+        <div class="form-group">
+          <label for="precio"><i class="fas fa-dollar-sign"></i> Precio Unitario (S/)</label>
+          <input type="number" id="precio" min="0" step="0.01">
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">
+          <i class="fas fa-save"></i> Guardar Producto
+        </button>
+        <button type="button" class="btn-secondary" onclick="limpiarFormulario()">
+          <i class="fas fa-eraser"></i> Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filtros y Búsqueda -->
+  <div class="filters-container">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="buscar" placeholder="Buscar productos...">
+    </div>
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="todos">
+        <i class="fas fa-list"></i> Todos
+      </button>
+      <button class="filter-btn" data-filter="perecible">
+        <i class="fas fa-apple-alt"></i> Perecibles
+      </button>
+      <button class="filter-btn" data-filter="no-perecible">
+        <i class="fas fa-box"></i> No Perecibles
+      </button>
+      <button class="filter-btn" data-filter="por-vencer">
+        <i class="fas fa-exclamation-triangle"></i> Por Vencer
+      </button>
+      <button class="filter-btn" data-filter="bajo-stock">
+        <i class="fas fa-chart-line"></i> Bajo Stock
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla de Productos -->
+  <div class="table-container">
+    <h2><i class="fas fa-table"></i> Inventario de Productos</h2>
+    <div class="table-wrapper">
+      <table id="tabla-inventario">
+        <thead>
+          <tr>
+            <th><i class="fas fa-tag"></i> Producto</th>
+            <th><i class="fas fa-list"></i> Tipo</th>
+            <th><i class="fas fa-calendar"></i> Ingreso</th>
+            <th><i class="fas fa-calendar-times"></i> Caducidad</th>
+            <th><i class="fas fa-calculator"></i> Cantidad</th>
+            <th><i class="fas fa-balance-scale"></i> Unidad</th>
+            <th><i class="fas fa-dollar-sign"></i> Precio</th>
+            <th><i class="fas fa-chart-bar"></i> Estado</th>
+            <th><i class="fas fa-cogs"></i> Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body">
+          <!-- Los datos se cargarán dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de Edición -->
+  <div id="modal-editar" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-edit"></i> Editar Producto</h3>
+        <span class="close">&times;</span>
+      </div>
+      <form id="form-editar">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="edit-nombre">Nombre del Producto</label>
+            <input type="text" id="edit-nombre" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-tipo">Tipo</label>
+            <select id="edit-tipo" required>
+              <option value="perecible">Perecible</option>
+              <option value="no-perecible">No Perecible</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-cantidad">Cantidad</label>
+            <input type="number" id="edit-cantidad" min="0" step="0.01" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-unidad">Unidad</label>
+            <select id="edit-unidad" required>
+              <option value="Unidades">Unidades</option>
+              <option value="Kilos">Kilos</option>
+              <option value="Gramos">Gramos</option>
+              <option value="Litros">Litros</option>
+              <option value="Mililitros">Mililitros</option>
+              <option value="Cajas">Cajas</option>
+              <option value="Paquetes">Paquetes</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-fecha-ingreso">Fecha de Ingreso</label>
+            <input type="date" id="edit-fecha-ingreso" required>
+          </div>
+          
+          <div class="form-group" id="edit-grupo-caducidad">
+            <label for="edit-fecha-caducidad">Fecha de Caducidad</label>
+            <input type="date" id="edit-fecha-caducidad">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-stock-minimo">Stock Mínimo</label>
+            <input type="number" id="edit-stock-minimo" min="0" step="0.01">
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-precio">Precio Unitario (S/)</label>
+            <input type="number" id="edit-precio" min="0" step="0.01">
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">
+            <i class="fas fa-save"></i> Actualizar
+          </button>
+          <button type="button" class="btn-secondary" onclick="cerrarModal()">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notificaciones -->
+  <div id="notificaciones"></div>
+
+  <script src="inventario.js"></script>
+</body>
+</html>

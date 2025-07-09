@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Poetsen+One&display=swap");
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ /* background: linear-gradient(to right, rgba(106,27,154,0.8), rgba(142,36,170,0.8));*/
+  background-color:rgba(115,121,125,0.9) /*rgba(0,0,0,0.7)*/;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px*rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  height: 90px;
+  width: 70px;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Título */
+.titulo {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: none;
+  color: black;
+  -webkit-text-stroke: 1px #ffffff;
+  margin-left: 15px;
+  flex: 1;
+  text-align: center;
+}
+
+/* Botón hamburguesa */
+.hamburguesa {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* Navbar */
+.navbar {
+  margin-top: 10px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.nav-menu-item {
+  transition: transform 0.2s;
+}
+
+.nav-menu-item:hover {
+  transform: scale(1.05);
+}
+
+.nav-menu-link {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #7b1fa2; /* morado intermedio */
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.nav-menu-link:hover {
+  background-color: #4a148c; /* morado más oscuro */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #6a1b9a;
+    padding: 10px;
+    display: none;
+    border-radius: 10px;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .hamburguesa {
+    display: block;
+  }
+}
+

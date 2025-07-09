@@ -1,0 +1,581 @@
+/* Importar fuentes modernas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variables CSS para consistencia */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.15);
+    --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.2);
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-light: #718096;
+    --border-radius: 16px;
+    --border-radius-large: 24px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* General Body y HTML estructura mejorada */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Efectos de partículas de fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(193, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.3) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header/Navbar mejorado con glassmorphism */
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 40px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap;
+    transition: var(--transition);
+}
+
+.navbar:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-medium);
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .logo img {
+    height: 60px;
+    width: 60px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    transition: var(--transition);
+    box-shadow: var(--shadow-soft);
+}
+
+.navbar .logo img:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: var(--shadow-medium);
+}
+
+.navbar h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    font-size: 2.5em;
+    flex-grow: 1;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.navbar h1:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.navbar .login-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.navbar .login-form:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.navbar input[type="text"] {
+    padding: 12px 20px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 500;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    width: 200px;
+    color: var(--text-primary);
+}
+
+.navbar input[type="text"]:focus {
+    border-color: transparent;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    transform: scale(1.02);
+}
+
+.navbar input[type="text"]::placeholder {
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.navbar button {
+    background: var(--secondary-gradient);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: var(--transition);
+}
+
+.navbar button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.navbar button:hover::before {
+    left: 100%;
+}
+
+.navbar button:active {
+    transform: translateY(-1px);
+}
+
+/* Carousel Section mejorado */
+.carousel-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding: 60px 0;
+    position: relative;
+}
+
+.carousel-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(1px);
+    z-index: -1;
+}
+
+.carousel-section-cards {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 600px;
+    overflow: hidden;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-strong);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.carousel-section-cards:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.section_card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.1);
+}
+
+.section_card.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.section_card-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-large);
+}
+
+.section_card-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(102, 126, 234, 0.1) 0%, 
+        transparent 50%, 
+        rgba(240, 147, 251, 0.1) 100%);
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.section_card-img:hover::before {
+    background: linear-gradient(45deg, 
+        rgba(102, 126, 234, 0.2) 0%, 
+        transparent 50%, 
+        rgba(240, 147, 251, 0.2) 100%);
+}
+
+.section_card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-large);
+    transition: var(--transition);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+.section_card-img:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.2) contrast(1.2);
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 30px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.carousel_control {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.8em;
+    padding: 15px 20px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel_control::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.carousel_control:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: var(--shadow-medium);
+    color: white;
+}
+
+.carousel_control:hover::before {
+    opacity: 1;
+}
+
+.carousel_control:active {
+    transform: translateY(-1px) scale(1.05);
+}
+
+/* Indicadores del carousel */
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.carousel-indicator.active {
+    background: var(--accent-gradient);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.carousel-indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+/* Responsive Design mejorado */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 15px 30px;
+    }
+    
+    .navbar h1 {
+        font-size: 2.2em;
+    }
+    
+    .carousel-section-cards {
+        height: 500px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .navbar h1 {
+        font-size: 2em;
+        text-align: center;
+        order: 1;
+    }
+
+    .navbar .logo {
+        order: 0;
+    }
+
+    .navbar .login-form {
+        order: 2;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: var(--border-radius);
+    }
+
+    .navbar input[type="text"] {
+        width: 100%;
+    }
+
+    .navbar button {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .carousel-section {
+        padding: 40px 0;
+    }
+
+    .carousel-section-cards {
+        height: 400px;
+        max-width: 95%;
+    }
+
+    .carousel-control {
+        padding: 0 15px;
+    }
+
+    .carousel_control {
+        font-size: 1.5em;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar h1 {
+        font-size: 1.8em;
+    }
+
+    .navbar .logo img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .carousel-section-cards {
+        height: 300px;
+    }
+
+    .carousel_control {
+        font-size: 1.3em;
+        padding: 10px 12px;
+    }
+
+    .carousel-indicators {
+        bottom: 10px;
+    }
+
+    .carousel-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Aplicar animaciones a los elementos */
+.navbar {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.carousel-section-cards {
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+/* Efectos de hover adicionales */
+.navbar .logo:hover {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Mejoras en el scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos para elementos de carga */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}

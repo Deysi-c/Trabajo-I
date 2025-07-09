@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Recetas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="recetas.css">
+</head>
+<body>
+    <header class="header">
+			<img src="logo.jpg" alt="Logo" class=logo>
+			<h1 class="titulo">COST AND PLANNER </h1>
+			<button class="hamburguesa" aria-label="Abrir menú">
+				<i class="fa-solid fa-bars"></i>
+			</button>
+			<!--Menu de navegacion -->
+			<nav class="navbar">
+				<ul class="nav-menu">
+					<li class="nav-menu-item"><a href="principal.html" class="nav-menu-link nav-link">Principal</a></li>
+        				<li class="nav-menu-item"><a href="calendario.html" class="nav-menu-link nav-link">Calendario</a></li>
+        				<li class="nav-menu-item"><a href="inventario.html" class="nav-menu-link nav-link">Inventario</a></li>
+        				<li class="nav-menu-item"><a href="reporte.html" class="nav-menu-link nav-link">Reporte</a></li>
+        				<li class="nav-menu-item"><a href="portada.html" class="nav-menu-link nav-link">Cerrar Sesión</a></li>
+      				</ul>
+    			</nav>
+		</header>
+
+    <main class="container">
+        <h1>Gestor de Recetas</h1>
+
+        <div class="card">
+            <h2>Añadir Nueva Receta</h2>
+            <form id="form-receta">
+                <input type="hidden" id="receta-id" value="">
+                <div class="form-group">
+                    <label for="nombre-receta">Nombre de la Receta:</label>
+                    <input type="text" id="nombre-receta" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="porciones-base">Cantidad:</label>
+                    <input type="number" id="porciones-base" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="costo-base">Costo Total (S/):</label>
+                    <input type="number" id="costo-base" min="0" step="any" required>
+                </div>
+                
+                <h3>Ingredientes</h3>
+                <div id="ingredientes-container">
+                </div>
+                <button type="button" id="btn-add-ingrediente" class="btn btn-secondary">Añadir Ingrediente</button>
+
+                <div class="form-group">
+                    <label for="preparacion-receta">Preparación:</label>
+                    <textarea id="preparacion-receta" rows="8" placeholder="Escribe los pasos de la preparación aquí..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Guardar Receta</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Calcular Costos y Porciones</h2>
+            <div class="form-group">
+                <label for="select-receta">Selecciona una Receta:</label>
+                <select id="select-receta">
+                    <option value="">-- Elige una receta guardada --</option>
+                </select>
+            </div>
+
+            <div id="calculadora-container" class="hidden">
+                <div class="form-group">
+                    <label for="nuevas-porciones">Calcular para (Nº de cantidad):</label>
+                    <input type="number" id="nuevas-porciones" min="1">
+                </div>
+                <button id="btn-calcular" class="btn btn-success">Calcular</button>
+            </div>
+        </div>
+
+        <div id="resultado-container" class="card hidden">
+            <h2>Resultados del Cálculo</h2>
+            <div id="resultado-contenido">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Recetas Guardadas</h2>
+            <div id="lista-recetas">
+                </div>
+        </div>
+
+    </main>
+
+    <script src="recetas.js"></script>
+</body>
+</html>

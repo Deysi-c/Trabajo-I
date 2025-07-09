@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Calendario de actividades y pedidos para Cost and Planner.">
+    <meta name="author" content="Karina, Deysi, Leo">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"> <script src="https://kit.fontawesome.com/4d73c9050e.js" crossorigin="anonymous"></script>
+
+    <title>Calendario de Pedidos - COST AND PLANNER</title>
+    <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="calendario.css" />
+    <link rel="icon" href="logo.jpg" type="image/png">
+    <script defer src="nav.js"></script>
+</head>
+<body>
+
+    <header class="header">
+			<img src="logo.jpg" alt="Logo" class=logo>
+			<h1 class="titulo">COST AND PLANNER </h1>
+			<button class="hamburguesa" aria-label="Abrir menú">
+				<i class="fa-solid fa-bars"></i>
+			</button>
+			<!--Menu de navegacion -->
+			<nav class="navbar">
+				<ul class="nav-menu">
+					<li class="nav-menu-item"><a href="principal.html" class="nav-menu-link nav-link">Principal</a></li>
+        				<li class="nav-menu-item"><a href="calendario.html" class="nav-menu-link nav-link">Calendario</a></li>
+        				<li class="nav-menu-item"><a href="inventario.html" class="nav-menu-link nav-link">Inventario</a></li>
+        				<li class="nav-menu-item"><a href="reporte.html" class="nav-menu-link nav-link">Reporte</a></li>
+        				<li class="nav-menu-item"><a href="portada.html" class="nav-menu-link nav-link">Cerrar Sesión</a></li>
+      				</ul>
+    			</nav>
+		</header>
+
+    <main class="calendar-page-content">
+        <h2 class="page-title">Calendario de Pedidos y Actividades</h2>
+
+        <section class="calendar-container">
+            <div class="calendar-header-nav">
+                <button id="prev-month" class="nav-button"><i class="bi bi-arrow-left-circle-fill"></i></button>
+                <h3 id="month-year" class="current-month-year"></h3>
+                <button id="next-month" class="nav-button"><i class="bi bi-arrow-right-circle-fill"></i></button>
+            </div>
+
+            <div class="calendar-grid-container">
+                <div class="weekdays-grid">
+                    <div>Dom</div>
+                    <div>Lun</div>
+                    <div>Mar</div>
+                    <div>Mié</div>
+                    <div>Jue</div>
+                    <div>Vie</div>
+                    <div>Sáb</div>
+                </div>
+                <div id="calendar-days-grid" class="calendar-days-grid">
+                    </div>
+            </div>
+
+            <button id="addEventBtn" class="add-event-button">Agregar Pedido/Evento</button>
+        </section>
+
+        <div id="eventModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3 id="modal-title"></h3>
+
+                <div id="event-form" class="event-form-section">
+                    <label for="event-date-display">Fecha:</label>
+                    <input type="text" id="event-date-display" readonly>
+                    <label for="event-title">Título del Pedido/Evento:</label>
+                    <input type="text" id="event-title" placeholder="Ej: Pedido torta cumpleaños">
+                    <label for="event-place">Lugar/Cliente:</label>
+                    <input type="text" id="event-place" placeholder="Ej: Casa de Juan / Cliente María P.">
+                    <label for="event-description">Descripción:</label>
+                    <textarea id="event-description" placeholder="Detalles del pedido: sabor, tamaño, hora de entrega, etc."></textarea>
+                    <div class="modal-actions">
+                        <button id="saveEventBtn" class="save-button">Guardar Pedido</button>
+                        <button id="updateEventBtn" class="update-button" style="display:none;">Actualizar Pedido</button>
+                    </div>
+                </div>
+
+                <div id="event-details-view" class="event-details-section" style="display:none;">
+                    <p><strong>Título:</strong> <span id="view-title"></span></p>
+                    <p><strong>Lugar/Cliente:</strong> <span id="view-place"></span></p>
+                    <p><strong>Descripción:</strong></p>
+                    <p id="view-description"></p>
+                    <div class="detail-actions">
+                        <button id="markCompletedBtn" class="mark-completed-button"><i class="bi bi-check-circle"></i> Marcar como Entregado</button>
+                        <button id="editEventBtn" class="edit-button"><i class="bi bi-pencil-square"></i> Editar</button>
+                        <button id="deleteEventBtn" class="delete-button"><i class="bi bi-trash"></i> Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="calendario.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+@import url(portada.css);
+
+.carrousel-section{
+	display:flex;
+	justify-content: center;
+	background-color: var(--white);
+}
+
+.carrousel-section-cards{
+	width:100%;
+}
+
+.section_card{
+	display:none;
+}
+
+.section_card-img img{
+	height:200px;
+}
+
+
