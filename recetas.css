@@ -1,642 +1,213 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-
+/* -- General Styling -- */
 :root {
-    --primary-red: #EE5F4D;
-    --dark-orange: #F98F2C;
-    --light-orange: #FFE6CC; /* A light orange for the main background */
-    --accent-yellow: #FFD700; /* Yellow for details and hover */
-    --accent-green: #8BC34A; /* Green for success/Excel buttons */
+    --primary-color: #6A1B9A;
+    --primary-hover: #7B24A6;
+    --secondary-color: #8A2BE2;
+    --secondary-hover: #9370DB;
+    --success-color: #4CAF50;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
     --text-dark: #333;
-    --text-light: #fff;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --border-radius: 12px;
-
-    /* New: Complementary color for buttons and input borders */
-    --complementary-color: #97E8CA; /* Soft Mint Green as an example. Try #ADD8E6 (light blue) or #FFF1DC (light peach) */
-    /* New: Secondary font for form fields */
-    --font-secondary: 'Arial Rounded MT Bold', 'Helvetica Neue', sans-serif; /* Example softer/rounded font. You might need to import a specific font or choose a common system font. */
-}
-
-html {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-*, *::before, *::after {
-    box-sizing: inherit;
+    --text-medium: #666;
+    --bg-light: #f5f7fa;
+    --white: #fff;
+    --border-light: #e0e0e0;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 body {
+    position: relative;
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--light-orange); /* Base background color */
     color: var(--text-dark);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevents unwanted horizontal scroll */
-
-    /* Background with kitchen illustration only on the sides */
-    background-image: 
-        linear-gradient(to right, 
-            rgba(255, 255, 255, 0.8) 0%, 
-            rgba(255, 255, 255, 0.8) 15%, 
-            rgba(255, 255, 255, 0) 25%, 
-            rgba(255, 255, 255, 0) 75%, 
-            rgba(255, 255, 255, 0.8) 85%, 
-            rgba(255, 255, 255, 0.8) 100%
-        ),
-        url('kit.jpg'); /* IMPORTANT! Change this to the actual path of your image */
-    background-repeat: repeat;
-    background-size: 180px; /* Adjust the size of the pattern image. Experiment with this value. */
-    background-blend-mode: multiply; /* Blend the image with the background color for a subtle effect */
-    background-attachment: fixed; /* Keeps background fixed during scroll */
-
-    /* Ensure content is not hidden by fixed header */
-    padding-top: 90px; /* Adjust if your header has a different height */
+    overflow-x: hidden;
 }
 
-/* --- Header (Navigation Bar) --- */
-.header {
-    background: var(--primary-red);
-    color: var(--text-light);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 10px var(--shadow-medium);
-    position: fixed; /* Fixed header at the top */
-    width: 100%;
+body::before {
+    content: "";
+    position: fixed; /* o absolute */
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensures it's above everything */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 70px;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap; /* Allows elements to wrap on small screens */
     width: 100%;
+    height: 100%;
+    background-image: url('fon.jpg');
+    background-size: 600px;
+    background-repeat: repeat;
+    opacity: 0.2; /* Ajusta la opacidad aquí */
+    z-index: -1;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-light);
-}
 
-.logo img {
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
-    height: 70px;
-    width: 50px;
-}
-
-.nav h1 {
-    margin: 0 1rem;
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    flex-grow: 1; /* Allows the title to take available space */
-    text-align: center;
-}
-
-.nav-toggle {
-    display: none; /* Hidden by default on desktop */
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: 1.8rem;
-    cursor: pointer;
-    order: 2; /* To appear to the right of the title on mobile */
-}
-
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1.5rem;
-    order: 1; /* To appear to the right of the logo on desktop */
-}
-
-.nav-menu-item {
-    position: relative;
-}
-
-.nav-menu-link {
-    color: var(--text-light);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease, transform 0.2s ease;
-    padding: 0.5rem 0;
-    white-space: nowrap; /* Prevents menu items from breaking into multiple lines */
-}
-
-.nav-menu-link:hover {
-    color: var(--accent-yellow);
-    transform: translateY(-2px);
-}
-
-.nav-menu-link::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 3px;
-    background: var(--accent-yellow);
-    transition: width 0.3s ease;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-}
-
-.nav-menu-link:hover::after {
-    width: 100%;
-}
-
-/* --- Main Content Container --- */
+/* -- Main Layout & Typography -- */
 .container {
-    max-width: 900px; /* Adjusted width for recipe forms */
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: var(--text-light);
-    border-radius: var(--border-radius);
-    /* New: Subtle shadow for forms */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for distinction */
-    position: relative;
-    z-index: 1;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    flex-grow: 1;
 }
 
-.container h1 {
-    font-size: 2.8rem;
+h1 {
+    text-align: center;
+    color: #5d3f6a;
+    margin-bottom: 30px;
+    font-size: 2.8em;
     font-weight: 700;
-    color: var(--primary-red);
-    text-align: center;
-    margin-bottom: 2.5rem;
-    border-bottom: 3px solid var(--light-orange);
-    padding-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Cards within the main container --- */
-.card {
-    background-color: var(--text-light);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    margin-bottom: 2rem; /* Space between cards */
-    box-shadow: 0 4px 15px var(--shadow-light);
-    border: 1px solid #eee; /* Subtle border for cards */
-    transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-}
-
-.card h2 {
-    font-size: 1.8rem;
-    color: var(--dark-orange);
+h2, h3 {
     margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    border-bottom: 1px dashed var(--light-orange);
-    padding-bottom: 1rem;
+    font-weight: 600;
 }
 
-/* --- General Form --- */
+h2 {
+    color: #4a4a4a;
+    font-size: 2em;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-light);
+    padding-bottom: 12px;
+}
+
+h3 {
+    color: #5d3f6a;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* -- Card & Item Styling -- */
+.card, .receta-item {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 35px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.receta-item {
+    padding: 20px;
+    margin-bottom: 18px;
+}
+
+.receta-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.receta-item h3 {
+    color: var(--primary-color);
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+/* -- Form Elements -- */
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 15px;
     font-weight: 600;
-    color: var(--text-dark);
-    font-size: 1.1rem;
+    color: var(--text-medium);
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group select,
-.form-group textarea {
+input[type="text"], input[type="number"], textarea, select {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: var(--text-dark);
-    background-color: #f9f9f9;
+    border-radius: 6px;
+    font-size: 1.05em;
+    box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    /* New: Secondary typography for form fields */
-    font-family: var(--font-secondary); 
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="number"]:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    /* New: Complementary color for focus border */
-    border-color: var(--complementary-color); 
-    box-shadow: 0 0 0 3px rgba(151, 232, 202, 0.4); /* Sombra de enfoque con el color complementario */
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    border-color: var(--secondary-color);
     outline: none;
+    box-shadow: 0 0 0 4px rgba(138, 43, 226, 0.2);
 }
 
 textarea {
-    resize: vertical; /* Allows vertical resizing only */
+    resize: vertical;
     min-height: 100px;
 }
 
-/* --- Dynamic Ingredients Styles --- */
-#ingredientes-container .ingrediente-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    align-items: flex-end; /* Align items to the end */
-}
-
-#ingredientes-container .ingrediente-item input {
-    flex: 1; /* Allows ingredient inputs to expand */
-}
-
-#ingredientes-container .ingrediente-item button {
-    background-color: var(--primary-red);
-    color: var(--text-light);
-    border: none;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-#ingredientes-container .ingrediente-item button:hover {
-    background-color: #D64C3C; /* Darker red */
-}
-
-/* --- General Buttons --- */
+/* -- Button Styling -- */
 .btn {
-    padding: 0.9rem 1.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.05em;
     font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-block; /* For buttons to respect vertical margin/padding */
-    margin-top: 1.5rem; /* Space above buttons */
-    text-align: center;
-    /* New: Complementary color for button background */
-    background-color: var(--complementary-color); 
-    color: var(--text-dark); /* Changed text color for better contrast with light complementary color */
+    text-decoration: none;
+    color: var(--white);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .btn:hover {
-    filter: brightness(1.1); /* Slightly brighter on hover */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px var(--shadow-light);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
-.btn-primary {
-    background-color: var(--primary-red); /* Keep primary red for main action */
-    color: var(--text-light);
-    width: 100%; /* Save button takes full width */
+.btn-primary { background-color: var(--primary-color); }
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+.btn-secondary { background-color: var(--secondary-color); margin: 15px 0 25px; }
+.btn-secondary:hover { background-color: var(--secondary-hover); }
+
+.btn-success { background-color: var(--success-color); }
+.btn-success:hover { background-color: #45a049; }
+
+.btn-danger { background-color: var(--danger-color); }
+.btn-danger:hover { background-color: #c82333; transform: translateY(-2px); }
+
+.btn-edit { background-color: var(--warning-color); color: var(--text-dark); }
+.btn-edit:hover { background-color: #e0a800; transform: translateY(-2px); }
+
+.btn-primary, .btn-success { width: 100%; margin-top: 20px; }
+.btn .fa-solid, .btn .fa-trash-alt, .btn .fa-edit, .btn .fa-calculator { margin-right: 8px; }
+
+/* -- Dynamic Ingredients List -- */
+.ingrediente-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
 }
 
-.btn-primary:hover {
-    background-color: #D64C3C;
-}
+.ingrediente-item input { flex: 3; }
+.ingrediente-item input[type="number"] { flex: 1; }
+.ingrediente-item .btn-remove-ingrediente { flex-shrink: 0; }
 
-.btn-secondary {
-    background-color: var(--dark-orange); /* Keep dark orange for secondary actions */
-    color: var(--text-light);
-    width: auto; /* For "Add Ingredient" button */
-}
-
-.btn-secondary:hover {
-    background-color: #E08226;
-}
-
-.btn-success {
-    background-color: var(--accent-green); /* Keep accent green for success actions */
-    color: var(--text-light);
-    width: 100%; /* Calculate button takes full width */
-}
-
-.btn-success:hover {
-    background-color: #689F38;
-}
-
-/* --- Hide/Show elements --- */
-.hidden {
-    display: none !important;
-}
-
-/* --- Calculation Results --- */
+/* -- Result Display -- */
 #resultado-container {
-    padding-top: 1.5rem;
-    border-left: 8px solid var(--accent-yellow); /* Accent border */
+    border-left: 5px solid var(--success-color);
+    padding-left: 25px;
+    margin-top: 20px;
 }
 
-#resultado-contenido {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-dark);
-}
+#resultado-contenido p { font-size: 1.15em; }
+#resultado-contenido strong { color: #218838; font-weight: 700; }
 
-#resultado-contenido p {
-    margin-bottom: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed #eee;
-}
+.hidden { display: none; }
 
-#resultado-contenido p:last-child {
-    border-bottom: none;
-    font-weight: 600;
-    color: var(--dark-orange);
-    font-size: 1.2rem;
-    padding-top: 1rem;
-}
-
-#resultado-contenido span.label {
-    font-weight: 600;
-    color: var(--primary-red);
-}
-
-#resultado-contenido span.value {
-    font-weight: 700;
-    color: var(--dark-orange);
-}
-
-/* --- Saved Recipes List --- */
-#lista-recetas {
-    margin-top: 1.5rem;
-}
-
-.receta-item {
-    background-color: #fefefe;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 1.2rem 1.5rem;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column; /* Change to column for better vertical control */
-    gap: 0.8rem;
-    transition: background-color 0.2s ease;
-}
-
-.receta-item:hover {
-    background-color: #fafafa;
-}
-
-.receta-item h3 {
-    font-size: 1.4rem;
-    color: var(--primary-red);
-    margin: 0 0 0.5rem 0;
-    border-bottom: 1px solid var(--light-orange);
-    padding-bottom: 0.5rem;
-}
-
-.receta-item p {
-    margin: 0;
-    color: #555;
-    font-size: 0.95rem;
-}
-
-.receta-item p strong {
-    color: var(--text-dark);
-}
-
-.receta-item .acciones {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 1rem;
-    justify-content: flex-end; /* Align buttons to the right */
-}
-
-.receta-item .acciones .btn {
-    margin-top: 0; /* Remove top margin from buttons within actions */
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-}
-
-.receta-item .acciones .btn-edit {
-    background-color: var(--accent-yellow);
-    color: var(--text-dark); /* Dark text for better visibility on yellow */
-}
-
-.receta-item .acciones .btn-edit:hover {
-    background-color: #E6C200; /* Darker yellow */
-}
-
-.receta-item .acciones .btn-delete {
-    background-color: var(--primary-red);
-    color: var(--text-light);
-}
-
-.receta-item .acciones .btn-delete:hover {
-    background-color: #D64C3C;
-}
-
-/* --- Footer --- */
-.footer {
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 3rem;
-    border-top: 1px solid var(--light-orange);
-    color: #666;
-    font-size: 0.9rem;
-    background-color: var(--text-light); /* A background for the footer if necessary */
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-}
-
-.footer #fechaReporte {
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-/* --- Responsive Design --- */
+/* -- Responsive Design -- */
 @media (max-width: 768px) {
-    body {
-        padding-top: 150px; /* Adjustment for header on mobile if it expands */
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-        min-height: auto;
-    }
-
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-
-    .nav h1 {
-        text-align: center; /* Center title on mobile */
-        width: 100%; /* Takes full available width */
-        margin-top: 0.5rem; /* Space above title */
-        margin-bottom: 0.5rem;
-        font-size: 1.6rem;
-    }
-
-    .nav-toggle {
-        display: block; /* Show hamburger button */
-        position: absolute;
-        right: 1rem;
-        top: 1.5rem;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        width: 100%;
-        display: none; /* Hidden by default */
-        text-align: center;
-        background-color: var(--primary-red);
-        padding: 0.5rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        gap: 0.5rem; /* Less space between items on mobile */
-    }
-
-    .nav-menu.active {
-        display: flex; /* Show menu when active */
-    }
-
-    .nav-menu-item {
-        margin: 0.3rem 0;
-    }
-
-    .nav-menu-link {
-        padding: 0.6rem 0;
-        display: block;
-    }
-
-    .container {
-        padding: 1rem;
-        margin: 1rem auto;
-    }
-
-    .container h1 {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-    }
-
-    .card {
-        padding: 1.5rem;
-    }
-
-    .card h2 {
-        font-size: 1.6rem;
-    }
-
-    .btn {
-        padding: 0.7rem 1.4rem;
-        font-size: 1rem;
-    }
-
-    .btn-primary, .btn-success, .btn-secondary {
-        width: 100%; /* Action buttons take full width */
-        margin-bottom: 0.8rem;
-    }
-
-    #ingredientes-container .ingrediente-item {
-        flex-direction: column; /* Stack inputs on mobile */
-        align-items: stretch; /* Stretch inputs to fill width */
-        gap: 0.5rem;
-    }
-
-    #ingredientes-container .ingrediente-item button {
-        width: 100%; /* Delete button takes full width */
-    }
-
-    .receta-item .acciones {
-        flex-direction: column; /* Stack action buttons */
-        align-items: stretch;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding-top: 180px; /* Adjustment for very small screens */
-    }
-
-    .header {
-        padding: 0.8rem;
-    }
-
-    .logo img {
-        height: 60px;
-        width: 45px;
-    }
-
-    .nav h1 {
-        font-size: 1.4rem;
-    }
-
-    .nav-toggle {
-        font-size: 1.6rem;
-        top: 1.2rem;
-    }
-
-    .container {
-        padding: 0.8rem;
-        margin: 0.8rem auto;
-    }
-
-    .container h1 {
-        font-size: 1.8rem;
-    }
-
-    .card {
-        padding: 1rem;
-    }
-
-    .card h2 {
-        font-size: 1.4rem;
-    }
-
-    .form-group label {
-        font-size: 1rem;
-    }
-
-    .form-group input, .form-group select, .form-group textarea {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    #resultado-contenido {
-        font-size: 0.95rem;
-    }
-
-    #resultado-contenido p:last-child {
-        font-size: 1.1rem;
-    }
-
-    .receta-item h3 {
-        font-size: 1.2rem;
-    }
-
-    .receta-item p {
-        font-size: 0.85rem;
-    }
-
-    .receta-item .acciones .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
+    body { font-size: 14px; }
+    .container { margin: 20px auto; padding: 15px; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    .card { padding: 20px; }
+    .btn, .btn-primary, .btn-success, .btn-secondary { width: 100%; margin-top: 10px; }
+    .ingrediente-item, .receta-item .acciones { flex-direction: column; align-items: stretch; gap: 10px; }
+    .receta-item .acciones { justify-content: center; }
 }
