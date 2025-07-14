@@ -8,22 +8,13 @@ const reportData = {
     ventasDelMes: [
         { producto: 'Torta de chocolate', ventas: 12340, unidades: 156 },
         { producto: 'Cupcake de Café', ventas: 8750, unidades: 142 },
-        { producto: 'Cupcake de mago', ventas: 6890, unidades: 98 },
+        { producto: 'Cupcake de mago', ventas: 6890, unidades: 98 }
     ]
 };
 
-// Función para formatear números con comas
+// Función para formatear números
 function formatNumber(num) {
     return num.toLocaleString('es-ES');
-}
-
-// Función para encontrar el producto más y menos vendido
-function getProductHighlights() {
-    const sortedByUnits = [...reportData.ventasDelMes].sort((a, b) => b.unidades - a.unidades);
-    return {
-        masVendido: sortedByUnits[0],
-        menosVendido: sortedByUnits[sortedByUnits.length - 1]
-    };
 }
 
 // Función para actualizar los datos en el DOM
@@ -35,13 +26,17 @@ function updateReportData() {
     document.getElementById('ganancias').textContent = formatNumber(reportData.ganancias);
     document.getElementById('totalIngredientes').textContent = formatNumber(reportData.totalIngredientes);
 
+    // Encontrar producto más y menos vendido
+    const sortedProducts = [...reportData.ventasDelMes].sort((a, b) => b.unidades - a.unidades);
+    const masVendido = sortedProducts[0];
+    const menosVendido = sortedProducts[sortedProducts.length - 1];
+
     // Actualizar productos destacados
-    const highlights = getProductHighlights();
-    document.getElementById('mejorProducto').textContent = highlights.masVendido.producto;
-    document.querySelector('.best-seller .product-sales').textContent = `${highlights.masVendido.unidades} unidades`;
+    document.getElementById('mejorProducto').textContent = masVendido.producto;
+    document.querySelector('.best-seller .product-sales').textContent = `${masVendido.unidades} unidades`;
     
-    document.getElementById('peorProducto').textContent = highlights.menosVendido.producto;
-    document.querySelector('.worst-seller .product-sales').textContent = `${highlights.menosVendido.unidades} unidades`;
+    document.getElementById('peorProducto').textContent = menosVendido.producto;
+    document.querySelector('.worst-seller .product-sales').textContent = `${menosVendido.unidades} unidades`;
 
     // Actualizar fecha del reporte
     const now = new Date();
@@ -55,22 +50,21 @@ function updateReportData() {
     document.getElementById('fechaReporte').textContent = fechaFormateada;
 }
 
-// Función para exportar a Excel (simulada)
+// Función para exportar a Excel (CSV)
 function exportToExcel() {
-    // Crear contenido CSV
     let csvContent = "Reporte de Ventas\n\n";
     csvContent += "Métricas Principales\n";
     csvContent += "Concepto,Valor\n";
     csvContent += `Unidades Producidas,${reportData.unidadesProducidas}\n`;
-    csvContent += `Costos Totales,$${reportData.costosTotales}\n`;
-    csvContent += `Ventas Totales,$${reportData.ventasTotales}\n`;
-    csvContent += `Ganancias,$${reportData.ganancias}\n`;
+    csvContent += `Costos Totales,S/ ${reportData.costosTotales}\n`;
+    csvContent += `Ventas Totales,S/ ${reportData.ventasTotales}\n`;
+    csvContent += `Ganancias,S/ ${reportData.ganancias}\n`;
     csvContent += `Total Ingredientes,${reportData.totalIngredientes}\n\n`;
     
     csvContent += "Ventas del Mes\n";
-    csvContent += "Producto,Ventas ($),Unidades\n";
+    csvContent += "Producto,Ventas,Unidades\n";
     reportData.ventasDelMes.forEach(item => {
-        csvContent += `${item.producto},$${item.ventas},${item.unidades}\n`;
+        csvContent += `${item.producto},S/ ${item.ventas},${item.unidades}\n`;
     });
 
     // Crear y descargar archivo
@@ -84,41 +78,159 @@ function exportToExcel() {
     link.click();
     document.body.removeChild(link);
     
-    // Mostrar mensaje de confirmación
     showNotification('Reporte Excel descargado exitosamente', 'success');
 }
 
-// Función para exportar a PDF (simulada)
+// Función para exportar a PDF
 function exportToPDF() {
-    // Simular la generación de PDF
-    const reportContent = {
-        title: 'Reporte de Ventas',
-        date: new Date().toLocaleDateString('es-ES'),
-        metrics: {
-            unidadesProducidas: reportData.unidadesProducidas,
-            costosTotales: reportData.costosTotales,
-            ventasTotales: reportData.ventasTotales,
-            ganancias: reportData.ganancias,
-            totalIngredientes: reportData.totalIngredientes
-        },
-        sales: reportData.ventasDelMes,
-        highlights: getProductHighlights()
-    };
-
-    // En una implementación real, aquí usarías una librería como jsPDF
-    console.log('Contenido del PDF:', reportContent);
+    const button = document.getElementById('exportPDF');
+    const originalText = button.innerHTML;
     
-    // Simular descarga
-    showNotification('Reporte PDF generado exitosamente', 'success');
+    // Mostrar estado de carga
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando PDF...';
+    button.disabled = true;
+    
+    // Verificar si jsPDF está disponible
+    if (typeof window.jspdf === 'undefined') {
+        showNotification('Error: Librería PDF no disponible', 'error');
+        button.innerHTML = originalText;
+        button.disabled = false;
+        return;
+    }
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        // Configuración
+        const margin = 20;
+        let yPosition = 30;
+        
+        // Título
+        pdf.setFontSize(20);
+        pdf.setTextColor(123, 31, 162);
+        pdf.text('Reporte de Ventas', margin, yPosition);
+        
+        // Fecha
+        yPosition += 15;
+        pdf.setFontSize(12);
+        pdf.setTextColor(102, 102, 102);
+        const fecha = new Date().toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        pdf.text(`Generado el ${fecha}`, margin, yPosition);
+        
+        // Línea divisoria
+        yPosition += 10;
+        pdf.setDrawColor(123, 31, 162);
+        pdf.line(margin, yPosition, 190, yPosition);
+        
+        // Métricas principales
+        yPosition += 20;
+        pdf.setFontSize(16);
+        pdf.setTextColor(123, 31, 162);
+        pdf.text('Métricas Principales', margin, yPosition);
+        
+        yPosition += 15;
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+        
+        const metrics = [
+            ['Unidades Producidas:', `${formatNumber(reportData.unidadesProducidas)} unidades`],
+            ['Costos Totales:', `S/ ${formatNumber(reportData.costosTotales)}`],
+            ['Ventas Totales:', `S/ ${formatNumber(reportData.ventasTotales)}`],
+            ['Ganancias:', `S/ ${formatNumber(reportData.ganancias)}`],
+            ['Total Ingredientes:', `${formatNumber(reportData.totalIngredientes)} ingredientes`]
+        ];
+        
+        metrics.forEach(([label, value]) => {
+            pdf.text(label, margin + 5, yPosition);
+            pdf.text(value, margin + 80, yPosition);
+            yPosition += 10;
+        });
+        
+        // Ventas del mes
+        yPosition += 15;
+        pdf.setFontSize(16);
+        pdf.setTextColor(123, 31, 162);
+        pdf.text('Ventas del Mes', margin, yPosition);
+        
+        yPosition += 15;
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+        
+        // Encabezados
+        pdf.text('Producto', margin + 5, yPosition);
+        pdf.text('Ventas', margin + 80, yPosition);
+        pdf.text('Unidades', margin + 130, yPosition);
+        
+        yPosition += 5;
+        pdf.line(margin, yPosition, 190, yPosition);
+        yPosition += 10;
+        
+        // Datos
+        reportData.ventasDelMes.forEach(item => {
+            pdf.text(item.producto, margin + 5, yPosition);
+            pdf.text(`S/ ${formatNumber(item.ventas)}`, margin + 80, yPosition);
+            pdf.text(`${item.unidades}`, margin + 130, yPosition);
+            yPosition += 10;
+        });
+        
+        // Productos destacados
+        yPosition += 15;
+        pdf.setFontSize(16);
+        pdf.setTextColor(123, 31, 162);
+        pdf.text('Productos Destacados', margin, yPosition);
+        
+        yPosition += 15;
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+        
+        const sortedProducts = [...reportData.ventasDelMes].sort((a, b) => b.unidades - a.unidades);
+        const masVendido = sortedProducts[0];
+        const menosVendido = sortedProducts[sortedProducts.length - 1];
+        
+        pdf.text('Más Vendido:', margin + 5, yPosition);
+        pdf.text(`${masVendido.producto} (${masVendido.unidades} unidades)`, margin + 5, yPosition + 8);
+        
+        yPosition += 25;
+        pdf.text('Menos Vendido:', margin + 5, yPosition);
+        pdf.text(`${menosVendido.producto} (${menosVendido.unidades} unidades)`, margin + 5, yPosition + 8);
+        
+        // Pie de página
+        pdf.setFontSize(10);
+        pdf.setTextColor(150, 150, 150);
+        pdf.text('Reporte generado por COST AND PLANNER', margin, 280);
+        
+        // Descargar
+        const nombreArchivo = `reporte_ventas_${new Date().toISOString().split('T')[0]}.pdf`;
+        pdf.save(nombreArchivo);
+        
+        showNotification('Reporte PDF descargado exitosamente', 'success');
+        
+    } catch (error) {
+        console.error('Error al generar PDF:', error);
+        showNotification('Error al generar PDF: ' + error.message, 'error');
+    } finally {
+        // Restaurar botón
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }
 }
 
 // Función para mostrar notificaciones
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Estilos para la notificación
+    const colors = {
+        success: '#4CAF50',
+        error: '#f44336',
+        info: '#2196F3'
+    };
+    
     Object.assign(notification.style, {
         position: 'fixed',
         top: '20px',
@@ -126,131 +238,66 @@ function showNotification(message, type = 'info') {
         padding: '15px 20px',
         borderRadius: '8px',
         color: 'white',
+        background: colors[type] || colors.info,
         fontWeight: '600',
         zIndex: '1000',
-        opacity: '0',
-        transform: 'translateY(-20px)',
-        transition: 'all 0.3s ease'
+        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+        transform: 'translateX(300px)',
+        transition: 'transform 0.3s ease'
     });
-
-    // Color según el tipo
-    if (type === 'success') {
-        notification.style.background = '#9CAF88';
-    } else if (type === 'error') {
-        notification.style.background = '#FF4444';
-    } else {
-        notification.style.background = '#FF8C42';
-    }
-
+    
     document.body.appendChild(notification);
-
+    
     // Animación de entrada
     setTimeout(() => {
-        notification.style.opacity = '1';
-        notification.style.transform = 'translateY(0)';
+        notification.style.transform = 'translateX(0)';
     }, 100);
-
+    
     // Remover después de 3 segundos
     setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateY(-20px)';
+        notification.style.transform = 'translateX(300px)';
         setTimeout(() => {
-            document.body.removeChild(notification);
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
         }, 300);
     }, 3000);
 }
 
-// Función para animar los números
+// Función para animar números
 function animateNumbers() {
     const numbers = document.querySelectorAll('.number');
     
     numbers.forEach(numberElement => {
         const finalValue = parseInt(numberElement.textContent.replace(/,/g, ''));
-        const duration = 1500; // 1.5 segundos
+        const duration = 1000;
         const startTime = performance.now();
         
         function updateNumber(currentTime) {
-            const elapsedTime = currentTime - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-            
-            // Función de easing
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const currentValue = Math.floor(finalValue * easeOutQuart);
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const currentValue = Math.floor(finalValue * progress);
             
             numberElement.textContent = formatNumber(currentValue);
             
             if (progress < 1) {
                 requestAnimationFrame(updateNumber);
-            } else {
-                numberElement.textContent = formatNumber(finalValue);
             }
         }
         
-        // Iniciar desde 0
         numberElement.textContent = '0';
         requestAnimationFrame(updateNumber);
     });
 }
 
-// Event Listeners
+// Inicialización
 document.addEventListener('DOMContentLoaded', function() {
-    // Actualizar datos del reporte
     updateReportData();
     
-    // Animar números después de un pequeño delay
-    setTimeout(animateNumbers, 500);
+    // Animar números después de cargar
+    setTimeout(animateNumbers, 300);
     
-    // Botones de exportación
+    // Event listeners para botones
     document.getElementById('exportExcel').addEventListener('click', exportToExcel);
     document.getElementById('exportPDF').addEventListener('click', exportToPDF);
-});
-
-// Función para actualizar datos en tiempo real (simulada)
-function updateRealTimeData() {
-    // Simular cambios pequeños en los datos
-    const variations = {
-        unidadesProducidas: Math.floor(Math.random() * 10) - 5,
-        costosTotales: Math.floor(Math.random() * 1000) - 500,
-        ventasTotales: Math.floor(Math.random() * 2000) - 1000,
-        totalIngredientes: Math.floor(Math.random() * 5) - 2
-    };
-    
-    // Aplicar variaciones
-    Object.keys(variations).forEach(key => {
-        if (reportData[key]) {
-            reportData[key] = Math.max(0, reportData[key] + variations[key]);
-        }
-    });
-    
-    // Recalcular ganancias
-    reportData.ganancias = reportData.ventasTotales - reportData.costosTotales;
-    
-    // Actualizar display
-    updateReportData();
-}
-
-// Actualizar datos cada 30 segundos (opcional)
-// setInterval(updateRealTimeData, 30000);
-
-// Función para refrescar el reporte
-function refreshReport() {
-    showNotification('Actualizando reporte...', 'info');
-    
-    setTimeout(() => {
-        updateRealTimeData();
-        animateNumbers();
-        showNotification('Reporte actualizado exitosamente', 'success');
-    }, 1000);
-}
-
-// Agregar botón de refrescar (opcional)
-document.addEventListener('DOMContentLoaded', function() {
-    const refreshButton = document.createElement('button');
-    refreshButton.textContent = '🔄 Actualizar';
-    refreshButton.className = 'btn-export';
-    refreshButton.style.background = '#FF8C42';
-    refreshButton.style.color = 'white';
-    refreshButton.addEventListener('click', refreshReport);
-    
-    document.querySelector('.export-buttons').appendChild(refreshButton);
 });
