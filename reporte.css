@@ -2,18 +2,25 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 :root {
-    --primary-red: #EE5F4D;
-    --dark-orange: #F98F2C;
-    --light-orange: #FFE6CC; /* Lighter shade for accents/background elements */
-    --coral: #FFB3A1; /* From image's discount badge */
-    --yellow: #FFD700; /* Bright yellow from image's cheese */
-    --green: #8BC34A; /* Green from image's radish top */
-    --beige: #F5F5DC; /* Neutral beige for cards */
-    --text-dark: #333;
-    --text-light: #fff;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --border-radius: 12px;
+    --primary-purple: #7b1fa2; /* Color principal */
+    --secondary-purple: #ba68c8; /* Púrpura pastel más claro */
+    --primary-pink: #f8bbd9; /* Rosa pastel */
+    --secondary-pink: #fce4ec; /* Rosa muy claro */
+    --primary-mint: #a7ffeb; /* Menta pastel */
+    --secondary-mint: #c8e6c9; /* Verde pastel */
+    --primary-peach: #ffccbc; /* Durazno pastel */
+    --secondary-peach: #ffe0b2; /* Durazno muy claro */
+    --primary-lavender: #e1bee7; /* Lavanda pastel */
+    --secondary-lavender: #f3e5f5; /* Lavanda muy claro */
+    --primary-sky: #bbdefb; /* Azul cielo pastel */
+    --secondary-sky: #e3f2fd; /* Azul muy claro */
+    --primary-cream: #fff8e1; /* Crema pastel */
+    --secondary-cream: #fffde7; /* Crema muy claro */
+    --text-dark: #424242;
+    --text-light: #ffffff;
+    --shadow-light: rgba(123, 31, 162, 0.1);
+    --shadow-medium: rgba(123, 31, 162, 0.2);
+    --border-radius: 16px;
 }
 
 html {
@@ -37,7 +44,7 @@ body {
 
 body::before {
     content: "";
-    position: fixed; /* o absolute */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -45,49 +52,9 @@ body::before {
     background-image: url('fon.jpg');
     background-size: 600px;
     background-repeat: repeat;
-    opacity: 0.2; /* Ajusta la opacidad aquí */
+    opacity: 0.08; /* Muy sutil para mejor contraste con pasteles */
     z-index: -1;
 }
-
-
-/* El resto de tu CSS permanece igual */
-/* Header (Navigation Bar) */
-.header {
-    background: var(--primary-red);
-    color: var(--text-light);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 8px var(--shadow-medium);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 70px;
-}
-
-
-
-.logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-light);
-}
-
-.logo img {
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
-    height:70px;
-    width:50px;
-}
-
-
-
-
 
 /* Main Content Container */
 .container {
@@ -96,9 +63,10 @@ body::before {
     padding: 1.5rem;
     background-color: var(--text-light);
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 20px var(--shadow-medium);
+    box-shadow: 0 8px 32px var(--shadow-medium);
     position: relative;
     z-index: 1;
+    border: 1px solid var(--secondary-lavender);
 }
 
 .container > .header {
@@ -110,7 +78,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    border-bottom: 2px solid var(--light-orange);
+    border-bottom: 3px solid var(--secondary-lavender);
     padding-bottom: 1rem;
     position: static;
     width: auto;
@@ -123,8 +91,9 @@ body::before {
 .container > .header h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-red);
+    color: var(--primary-purple);
     margin: 0;
+    text-shadow: 0 2px 4px rgba(123, 31, 162, 0.1);
 }
 
 .export-buttons {
@@ -135,33 +104,34 @@ body::before {
 .export-buttons .btn-export {
     padding: 0.8rem 1.5rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-excel {
-    background-color: var(--green);
-    color: var(--text-light);
+    background: linear-gradient(135deg, var(--primary-mint), var(--secondary-mint));
+    color: var(--text-dark);
 }
 
 .btn-excel:hover {
-    background-color: #689F38;
+    background: linear-gradient(135deg, #81f7d8, #a5d6a7);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 16px rgba(167, 255, 235, 0.4);
 }
 
 .btn-pdf {
-    background-color: var(--dark-orange);
-    color: var(--text-light);
+    background: linear-gradient(135deg, var(--primary-peach), var(--secondary-peach));
+    color: var(--text-dark);
 }
 
 .btn-pdf:hover {
-    background-color: #E08226;
+    background: linear-gradient(135deg, #ffb39d, #ffcc9a);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 16px rgba(255, 204, 188, 0.4);
 }
 
 /* Dashboard Cards */
@@ -176,7 +146,7 @@ body::before {
     background-color: var(--text-light);
     border-radius: var(--border-radius);
     padding: 1.5rem;
-    box-shadow: 0 4px 12px var(--shadow-light);
+    box-shadow: 0 4px 16px var(--shadow-light);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -184,11 +154,23 @@ body::before {
     justify-content: space-between;
     align-items: center;
     border-left: 8px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px var(--shadow-medium);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
 }
 
 .card h2 {
@@ -210,6 +192,7 @@ body::before {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .metric .currency {
@@ -227,23 +210,39 @@ body::before {
 }
 
 /* Card Specific Colors */
-.card-red { border-color: var(--primary-red); }
-.card-red .number, .card-red .currency { color: var(--primary-red); }
+.card-red { 
+    border-color: var(--primary-pink);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-pink));
+}
+.card-red .number, .card-red .currency { color: var(--primary-pink); }
 
-.card-orange { border-color: var(--dark-orange); }
-.card-orange .number, .card-orange .currency { color: var(--dark-orange); }
+.card-orange { 
+    border-color: var(--primary-peach);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-peach));
+}
+.card-orange .number, .card-orange .currency { color: var(--primary-peach); }
 
-.card-coral { border-color: var(--coral); }
-.card-coral .number, .card-coral .currency { color: var(--coral); }
+.card-coral { 
+    border-color: var(--primary-lavender);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-lavender));
+}
+.card-coral .number, .card-coral .currency { color: var(--primary-lavender); }
 
-.card-yellow { border-color: var(--yellow); }
-.card-yellow .number, .card-yellow .currency { color: var(--yellow); }
+.card-yellow { 
+    border-color: var(--primary-cream);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-cream));
+}
+.card-yellow .number, .card-yellow .currency { color: #f9a825; }
 
-.card-green { border-color: var(--green); }
-.card-green .number, .card-green .currency { color: var(--green); }
+.card-green { 
+    border-color: var(--primary-mint);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-mint));
+}
+.card-green .number, .card-green .currency { color: var(--primary-mint); }
 
 .card-beige {
-    border-color: var(--beige);
+    border-color: var(--primary-sky);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-sky));
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -253,6 +252,7 @@ body::before {
 .card-beige h2 {
     width: 100%;
     text-align: center;
+    color: var(--primary-sky);
 }
 
 .full-width {
@@ -270,7 +270,16 @@ body::before {
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem 1rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--secondary-lavender);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-lavender));
+    transition: all 0.3s ease;
+}
+
+.sales-item:hover {
+    background: linear-gradient(135deg, var(--secondary-lavender), var(--primary-lavender));
+    transform: translateX(5px);
 }
 
 .sales-item:last-child {
@@ -284,7 +293,11 @@ body::before {
 
 .sales-item .sales-amount {
     font-weight: 700;
-    color: var(--dark-orange);
+    color: var(--primary-purple);
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Highlights Section */
@@ -296,20 +309,39 @@ body::before {
 }
 
 .highlight-card {
-    background-color: var(--text-light);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-lavender));
     border-radius: var(--border-radius);
     padding: 1.5rem;
-    box-shadow: 0 4px 12px var(--shadow-light);
+    box-shadow: 0 4px 16px var(--shadow-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     border-top: 8px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(123, 31, 162, 0.05));
+    z-index: 0;
+}
+
+.highlight-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .highlight-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 32px var(--shadow-medium);
 }
 
 .highlight-card h3 {
@@ -317,6 +349,7 @@ body::before {
     margin-top: 0;
     margin-bottom: 1rem;
     font-weight: 600;
+    color: var(--primary-purple);
 }
 
 .product-info {
@@ -327,8 +360,8 @@ body::before {
     display: block;
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-red);
     margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-info .product-sales {
@@ -337,73 +370,49 @@ body::before {
     font-weight: 500;
 }
 
-.best-seller { border-color: var(--green); }
-.best-seller .product-name { color: var(--green); }
+.best-seller { 
+    border-color: var(--primary-mint);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-mint));
+}
+.best-seller .product-name { 
+    color: var(--primary-mint);
+    background: linear-gradient(135deg, var(--primary-mint), var(--secondary-mint));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-.worst-seller { border-color: var(--primary-red); }
-.worst-seller .product-name { color: var(--primary-red); }
+.worst-seller { 
+    border-color: var(--primary-pink);
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-pink));
+}
+.worst-seller .product-name { 
+    color: var(--primary-pink);
+    background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
 /* Footer */
 .footer {
     text-align: center;
     padding: 1.5rem;
     margin-top: 2rem;
-    border-top: 1px solid var(--light-orange);
+    border-top: 2px solid var(--secondary-lavender);
     color: #666;
     font-size: 0.9rem;
+    background: linear-gradient(135deg, var(--text-light), var(--secondary-lavender));
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 .footer #fechaReporte {
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--primary-purple);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        padding-top: 150px;
-    }
-
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav h1 {
-        text-align: left;
-        margin-top: 1rem;
-    }
-
-    .nav-toggle {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-        text-align: center;
-        background-color: var(--primary-red);
-        padding: 1rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .nav-menu-item {
-        margin: 0.5rem 0;
-    }
-
-    .nav-menu-link {
-        padding: 0.8rem 0;
-        display: block;
-    }
-
     .container > .header {
         flex-direction: column;
         align-items: flex-start;
@@ -435,9 +444,6 @@ body::before {
 }
 
 @media (max-width: 480px) {
-    body {
-        padding-top: 180px;
-    }
     .container {
         padding: 1rem;
         margin: 1rem auto;
@@ -457,5 +463,13 @@ body::before {
 
     .product-info .product-name {
         font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .highlight-card {
+        padding: 1rem;
     }
 }
