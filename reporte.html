@@ -6,33 +6,37 @@
     <title>Reporte de Ventas</title>
     <link rel="stylesheet" href="reporte.css">
     <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-     <!-- Barra de navegación -->
-  <header class="header">
-			<img src="logo.jpg" alt="Logo" class=logo>
-			<h1 class="titulo">COST AND PLANNER </h1>
-			<button class="hamburguesa" aria-label="Abrir menú">
-				<i class="fa-solid fa-bars"></i>
-			</button>
-			<!--Menu de navegacion -->
-			<nav class="navbar">
-				<ul class="nav-menu">
-					<li class="nav-menu-item"><a href="principal.html" class="nav-menu-link nav-link">Principal</a></li>
-        				<li class="nav-menu-item"><a href="calendario.html" class="nav-menu-link nav-link">Calendario</a></li>
-        				<li class="nav-menu-item"><a href="inventario.html" class="nav-menu-link nav-link">Inventario</a></li>
-        				<li class="nav-menu-item"><a href="reporte.html" class="nav-menu-link nav-link">Reporte</a></li>
-        				<li class="nav-menu-item"><a href="portada.html" class="nav-menu-link nav-link">Cerrar Sesión</a></li>
-      				</ul>
-    			</nav>
-	</header>
+    <!-- Barra de navegación -->
+    <header class="header">
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <h1 class="titulo">COST AND PLANNER</h1>
+        <button class="hamburguesa" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li class="nav-menu-item"><a href="principal.html" class="nav-menu-link nav-link">Principal</a></li>
+                <li class="nav-menu-item"><a href="calendario.html" class="nav-menu-link nav-link">Calendario</a></li>
+                <li class="nav-menu-item"><a href="inventario.html" class="nav-menu-link nav-link">Inventario</a></li>
+                <li class="nav-menu-item"><a href="reporte.html" class="nav-menu-link nav-link">Reporte</a></li>
+                <li class="nav-menu-item"><a href="portada.html" class="nav-menu-link nav-link">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
         <header class="header">
             <h1>Reporte de Ventas</h1>
             <div class="export-buttons">
-                <button id="exportExcel" class="btn-export btn-excel">Exportar Excel</button>
-                <button id="exportPDF" class="btn-export btn-pdf">Exportar PDF</button>
+                <button id="exportExcel" class="btn-export btn-excel">
+                    <i class="fas fa-file-excel"></i> Exportar Excel
+                </button>
+                <button id="exportPDF" class="btn-export btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Exportar PDF
+                </button>
             </div>
         </header>
 
@@ -98,7 +102,6 @@
                         <span class="product-name">Cupcake de mago</span>
                         <span class="sales-amount">S/6,890</span>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -127,6 +130,8 @@
         </footer>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="reporte.js"></script>
 </body>
 </html>
