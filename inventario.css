@@ -20,23 +20,31 @@ body::before {
     background-image: url('fon.jpg');
     background-size: 600px;
     background-repeat: repeat;
-    opacity: 0.2; /* Ajusta la opacidad aquí */
+    opacity: 0.1; /* Reducido para mejor contraste con pasteles */
     z-index: -1;
 }
-/* Color Palette from Image (Approximated) */
+
+/* Color Palette - Pasteles con #7b1fa2 como principal */
 :root {
-    --primary-orange: #f29a43; /* Similar to "Exportar PDF" button */
-    --secondary-orange: #ffc287; /* Lighter shade for accents */
-    --primary-green: #6cb642; /* Similar to "Exportar Excel" button */
-    --secondary-green: #a7e07a; /* Lighter shade for accents */
-    --primary-blue: #428bca; /* Similar to "Actualizar" button */
-    --secondary-blue: #7bbce8; /* Lighter shade for accents */
-    --dark-gray: #343a40; /* For text and darker elements */
-    --medium-gray: #6c757d; /* For secondary text */
-    --light-gray: #e9ecef; /* For borders and subtle backgrounds */
+    --primary-purple: #7b1fa2; /* Color principal */
+    --secondary-purple: #ba68c8; /* Púrpura pastel más claro */
+    --primary-pink: #f8bbd9; /* Rosa pastel */
+    --secondary-pink: #fce4ec; /* Rosa muy claro */
+    --primary-mint: #a7ffeb; /* Menta pastel */
+    --secondary-mint: #c8e6c9; /* Verde pastel */
+    --primary-peach: #ffccbc; /* Durazno pastel */
+    --secondary-peach: #ffe0b2; /* Durazno muy claro */
+    --primary-lavender: #e1bee7; /* Lavanda pastel */
+    --secondary-lavender: #f3e5f5; /* Lavanda muy claro */
+    --primary-sky: #bbdefb; /* Azul cielo pastel */
+    --secondary-sky: #e3f2fd; /* Azul muy claro */
+    --dark-gray: #424242; /* Gris oscuro suave */
+    --medium-gray: #757575; /* Gris medio */
+    --light-gray: #f5f5f5; /* Gris muy claro */
     --white: #ffffff;
-    --red-alert: #dc3545; /* For "Por Vencer" and alerts */
-    --yellow-warning: #ffc107; /* For "Bajo Stock" and warnings */
+    --red-alert: #ef9a9a; /* Rojo pastel */
+    --yellow-warning: #fff59d; /* Amarillo pastel */
+    --text-dark: #424242; /* Texto principal */
 }
 
 /* Header Title for Inventory Page */
@@ -44,24 +52,26 @@ body::before {
     background-color: var(--white);
     padding: 20px 40px;
     margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(123, 31, 162, 0.1);
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the title */
+    justify-content: center;
+    border: 1px solid var(--secondary-lavender);
 }
 
 .header-titulo h1 {
     margin: 0;
     font-size: 2em;
-    color: var(--dark-gray);
+    color: var(--primary-purple);
     display: flex;
     align-items: center;
+    font-weight: 600;
 }
 
 .header-titulo h1 .fas {
     margin-right: 15px;
-    color: var(--primary-blue);
+    color: var(--secondary-purple);
     font-size: 1.2em;
 }
 
@@ -76,19 +86,20 @@ body::before {
 .stat-card {
     background-color: var(--white);
     padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(123, 31, 162, 0.08);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--secondary-lavender);
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(123, 31, 162, 0.15);
 }
 
 .stat-icon {
@@ -105,25 +116,25 @@ body::before {
 }
 
 .perecibles-icon {
-    background-color: var(--primary-green);
+    background: linear-gradient(135deg, var(--primary-mint), var(--secondary-mint));
 }
 
 .no-perecibles-icon {
-    background-color: var(--primary-blue);
+    background: linear-gradient(135deg, var(--primary-sky), var(--secondary-sky));
 }
 
 .vencimiento-icon {
-    background-color: var(--red-alert);
+    background: linear-gradient(135deg, var(--red-alert), var(--secondary-pink));
 }
 
 .stock-icon {
-    background-color: var(--yellow-warning);
+    background: linear-gradient(135deg, var(--primary-peach), var(--secondary-peach));
 }
 
 .stat-number {
     font-size: 2.2em;
-    font-weight: bold;
-    color: var(--dark-gray);
+    font-weight: 700;
+    color: var(--primary-purple);
     margin-bottom: 5px;
 }
 
@@ -132,6 +143,7 @@ body::before {
     color: var(--medium-gray);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 500;
 }
 
 /* Form Container */
@@ -139,23 +151,25 @@ body::before {
     background-color: var(--white);
     padding: 30px;
     margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(123, 31, 162, 0.08);
+    border: 1px solid var(--secondary-lavender);
 }
 
 .form-container h2 {
     text-align: center;
     margin-bottom: 25px;
-    color: var(--dark-gray);
+    color: var(--primary-purple);
     font-size: 1.8em;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
 }
 
 .form-container h2 .fas {
     margin-right: 10px;
-    color: var(--primary-orange);
+    color: var(--secondary-purple);
 }
 
 .form-grid {
@@ -173,14 +187,14 @@ body::before {
 .form-group label {
     margin-bottom: 8px;
     font-weight: 600;
-    color: var(--medium-gray);
+    color: var(--primary-purple);
     display: flex;
     align-items: center;
 }
 
 .form-group label .fas {
     margin-right: 8px;
-    color: var(--primary-blue); /* Consistent icon color */
+    color: var(--secondary-purple);
 }
 
 .form-group input[type="text"],
@@ -188,17 +202,18 @@ body::before {
 .form-group input[type="date"],
 .form-group select {
     padding: 12px;
-    border: 1px solid var(--light-gray);
-    border-radius: 5px;
+    border: 2px solid var(--secondary-lavender);
+    border-radius: 8px;
     font-size: 1em;
-    color: var(--dark-gray);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--white);
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: var(--primary-orange);
-    box-shadow: 0 0 0 3px rgba(242, 154, 67, 0.2);
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.1);
     outline: none;
 }
 
@@ -213,13 +228,14 @@ body::before {
 .btn-secondary {
     padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.05em;
     font-weight: 600;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary .fas,
@@ -228,23 +244,25 @@ body::before {
 }
 
 .btn-primary {
-    background-color: var(--primary-green);
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
     color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: #5ea138; /* Slightly darker green */
+    background: linear-gradient(135deg, #6a1b9a, #ab47bc);
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(123, 31, 162, 0.3);
 }
 
 .btn-secondary {
-    background-color: var(--medium-gray);
-    color: var(--white);
+    background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+    color: var(--primary-purple);
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268; /* Slightly darker gray */
+    background: linear-gradient(135deg, #f48fb1, #f8bbd9);
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(244, 143, 177, 0.3);
 }
 
 /* Filters and Search */
@@ -257,8 +275,9 @@ body::before {
     margin: 20px;
     padding: 20px;
     background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(123, 31, 162, 0.08);
+    border: 1px solid var(--secondary-lavender);
 }
 
 .search-box {
@@ -266,13 +285,14 @@ body::before {
     display: flex;
     align-items: center;
     max-width: 400px;
-    border: 1px solid var(--light-gray);
-    border-radius: 5px;
+    border: 2px solid var(--secondary-lavender);
+    border-radius: 8px;
     padding: 8px 12px;
+    background-color: var(--white);
 }
 
 .search-box .fas {
-    color: var(--medium-gray);
+    color: var(--secondary-purple);
     margin-right: 10px;
 }
 
@@ -282,7 +302,7 @@ body::before {
     flex-grow: 1;
     font-size: 1em;
     padding: 5px;
-    color: var(--dark-gray);
+    color: var(--text-dark);
 }
 
 .filter-buttons {
@@ -293,15 +313,16 @@ body::before {
 
 .filter-btn {
     padding: 10px 18px;
-    border: 1px solid var(--light-gray);
-    border-radius: 5px;
+    border: 2px solid var(--secondary-lavender);
+    border-radius: 8px;
     background-color: var(--white);
-    color: var(--dark-gray);
+    color: var(--primary-purple);
     cursor: pointer;
     font-size: 0.95em;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    font-weight: 500;
 }
 
 .filter-btn .fas {
@@ -309,49 +330,52 @@ body::before {
 }
 
 .filter-btn:hover {
-    background-color: var(--light-gray);
-    border-color: var(--medium-gray);
+    background-color: var(--secondary-lavender);
+    border-color: var(--primary-purple);
+    transform: translateY(-1px);
 }
 
 .filter-btn.active {
-    background-color: var(--primary-blue);
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
     color: var(--white);
-    border-color: var(--primary-blue);
+    border-color: var(--primary-purple);
 }
 
 .filter-btn.active:hover {
-    background-color: #3b7bb6; /* Slightly darker blue */
+    background: linear-gradient(135deg, #6a1b9a, #ab47bc);
 }
 
 /* Specific filter button colors */
-.filter-btn[data-filter="perecible"] .fas { color: var(--primary-green); }
-.filter-btn[data-filter="no-perecible"] .fas { color: var(--primary-blue); }
+.filter-btn[data-filter="perecible"] .fas { color: var(--primary-mint); }
+.filter-btn[data-filter="no-perecible"] .fas { color: var(--primary-sky); }
 .filter-btn[data-filter="por-vencer"] .fas { color: var(--red-alert); }
-.filter-btn[data-filter="bajo-stock"] .fas { color: var(--yellow-warning); }
+.filter-btn[data-filter="bajo-stock"] .fas { color: var(--primary-peach); }
 
 /* Table Container */
 .table-container {
     background-color: var(--white);
     padding: 30px;
     margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Ensures table is scrollable on small screens */
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(123, 31, 162, 0.08);
+    overflow-x: auto;
+    border: 1px solid var(--secondary-lavender);
 }
 
 .table-container h2 {
     text-align: center;
     margin-bottom: 25px;
-    color: var(--dark-gray);
+    color: var(--primary-purple);
     font-size: 1.8em;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
 }
 
 .table-container h2 .fas {
     margin-right: 10px;
-    color: var(--primary-blue);
+    color: var(--secondary-purple);
 }
 
 .table-wrapper {
@@ -368,11 +392,11 @@ body::before {
 #tabla-inventario td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--secondary-lavender);
 }
 
 #tabla-inventario th {
-    background-color: var(--primary-blue);
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
     color: var(--white);
     font-weight: 600;
     text-transform: uppercase;
@@ -385,11 +409,11 @@ body::before {
 }
 
 #tabla-inventario tbody tr:nth-child(even) {
-    background-color: #f8f9fa; /* Slightly alternate row color */
+    background-color: var(--secondary-lavender);
 }
 
 #tabla-inventario tbody tr:hover {
-    background-color: #e2e6ea; /* Highlight on hover */
+    background-color: var(--primary-lavender);
 }
 
 #tabla-inventario .actions-buttons button {
@@ -398,15 +422,16 @@ body::before {
     cursor: pointer;
     font-size: 1.1em;
     margin: 0 5px;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 #tabla-inventario .actions-buttons .edit-btn {
-    color: var(--primary-blue);
+    color: var(--primary-purple);
 }
 
 #tabla-inventario .actions-buttons .edit-btn:hover {
-    color: #3b7bb6;
+    color: var(--secondary-purple);
+    transform: scale(1.1);
 }
 
 #tabla-inventario .actions-buttons .delete-btn {
@@ -414,51 +439,53 @@ body::before {
 }
 
 #tabla-inventario .actions-buttons .delete-btn:hover {
-    color: #c82333;
+    color: #e57373;
+    transform: scale(1.1);
 }
 
 /* Status Badges */
 .status-badge {
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 0.85em;
     font-weight: 600;
     color: var(--white);
     text-align: center;
-    display: inline-block; /* Allows proper padding and background */
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .status-badge.optimo {
-    background-color: var(--primary-green);
+    background: linear-gradient(135deg, var(--primary-mint), var(--secondary-mint));
+    color: var(--dark-gray);
 }
 
 .status-badge.por-vencer {
-    background-color: var(--yellow-warning);
-    color: var(--dark-gray); /* Better contrast */
+    background: linear-gradient(135deg, var(--yellow-warning), var(--secondary-peach));
+    color: var(--dark-gray);
 }
 
 .status-badge.agotado {
-    background-color: var(--red-alert);
+    background: linear-gradient(135deg, var(--red-alert), var(--secondary-pink));
+    color: var(--dark-gray);
 }
 
 .status-badge.bajo-stock {
-    background-color: var(--primary-orange);
+    background: linear-gradient(135deg, var(--primary-peach), var(--secondary-peach));
+    color: var(--dark-gray);
 }
 
-
-/* Modal Styles - CRITICAL FIX HERE */
+/* Modal Styles */
 .modal {
-    display: none; /* This ensures the modal is hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-    /* DO NOT add 'display: flex;' or 'display: block;' here.
-       It should only be added by JavaScript when the modal is opened. */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(123, 31, 162, 0.4);
     align-items: center;
     justify-content: center;
 }
@@ -467,11 +494,12 @@ body::before {
     background-color: var(--white);
     margin: auto;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(123, 31, 162, 0.2);
     width: 90%;
     max-width: 600px;
     position: relative;
+    border: 1px solid var(--secondary-lavender);
 }
 
 .modal-header {
@@ -479,21 +507,22 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
-    border-bottom: 1px solid var(--light-gray);
+    border-bottom: 2px solid var(--secondary-lavender);
     padding-bottom: 15px;
 }
 
 .modal-header h3 {
     margin: 0;
-    color: var(--dark-gray);
+    color: var(--primary-purple);
     font-size: 1.6em;
     display: flex;
     align-items: center;
+    font-weight: 600;
 }
 
 .modal-header h3 .fas {
     margin-right: 10px;
-    color: var(--primary-orange);
+    color: var(--secondary-purple);
 }
 
 .modal .close {
@@ -501,7 +530,7 @@ body::before {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 .modal .close:hover,
@@ -511,7 +540,7 @@ body::before {
 }
 
 #form-editar .form-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted for modal */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 #form-editar .form-actions {
@@ -526,35 +555,38 @@ body::before {
     right: 20px;
     z-index: 1000;
     display: flex;
-    flex-direction: column-reverse; /* Newest notification at the bottom */
+    flex-direction: column-reverse;
     gap: 10px;
 }
 
 .notificacion {
-    background-color: #333; /* Dark background */
+    background-color: var(--primary-purple);
     color: var(--white);
     padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(123, 31, 162, 0.3);
     display: flex;
     align-items: center;
     gap: 10px;
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px); /* Start slightly below */
+    opacity: 0;
+    transform: translateY(20px);
     animation: fadeInSlideUp 0.5s forwards ease-out;
     min-width: 250px;
 }
 
 .notificacion.success {
-    background-color: var(--primary-green);
+    background: linear-gradient(135deg, var(--primary-mint), var(--secondary-mint));
+    color: var(--dark-gray);
 }
 
 .notificacion.error {
-    background-color: var(--red-alert);
+    background: linear-gradient(135deg, var(--red-alert), var(--secondary-pink));
+    color: var(--dark-gray);
 }
 
 .notificacion.warning {
-    background-color: var(--primary-orange);
+    background: linear-gradient(135deg, var(--primary-peach), var(--secondary-peach));
+    color: var(--dark-gray);
 }
 
 .notificacion .fas {
@@ -652,11 +684,11 @@ body::before {
     }
 
     .stats-container {
-        grid-template-columns: 1fr; /* Stack on very small screens */
+        grid-template-columns: 1fr;
     }
 
     .stat-card {
-        flex-direction: row; /* Layout stats horizontally */
+        flex-direction: row;
         justify-content: flex-start;
         gap: 15px;
         text-align: left;
@@ -677,7 +709,7 @@ body::before {
     }
 
     .filter-btn {
-        flex-grow: 1; /* Make filter buttons fill width */
+        flex-grow: 1;
         justify-content: center;
     }
 }
